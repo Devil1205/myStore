@@ -16,6 +16,7 @@ connectDb();
 
 //routes
 app.use("/api/v1/",require('./routes/product'));
+app.use("/api/v1/",require('./routes/user'));
 
 app.use(errorHandler);
 

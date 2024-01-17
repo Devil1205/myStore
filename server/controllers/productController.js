@@ -1,5 +1,6 @@
 const asyncHandler = require('../middlewares/asyncHandler');
 const Product = require('../models/productSchema');
+const apiFeatures = require('../utils/apiFeatures'); 
 
 //create product route controller
 const createProduct = asyncHandler(async(req,res,next)=>{
@@ -13,8 +14,13 @@ const createProduct = asyncHandler(async(req,res,next)=>{
 
 //get products route controller
 const getProducts = async(req,res)=>{
-    const product = await Product.find();
-    return res.status(200).json(product);
+    try{
+        const product = await apiFeatures.search(Product,req.query);
+        return res.status(200).json(product);
+    }
+    catch(e){
+        res.status(500).json({success: false, message: "Internal Server Error"});
+    }
 }
 
 //update product route controller
