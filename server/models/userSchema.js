@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EXPIRY = process.env.JWT_EXPIRY;
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const User = new mongoose.Schema({
 
@@ -18,7 +22,7 @@ const User = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Please enter your password"],
-        minLength: [4, "Password must be atleast 6 characters"],
+        minLength: [6, "Password must be atleast 6 characters"],
         select: false
     },
     avatar: {
@@ -38,5 +42,25 @@ const User = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpire: Date
 });
+
+//to hash the password before saving
+User.pre("save", async function (next) {
+    if (!this.isModified() === "password") {
+        next();
+    }
+    this.password = await bcrypt.hash(this.password,10);
+    next();
+})
+
+//to generate and return jwt token
+User.methods.getJWTToken = function(){
+    const token = jwt.sign({id: this._id},JWT_SECRET,{expiresIn: JWT_EXPIRY});
+    return token;
+}
+
+//to verify the password
+User.methods.comparePassword = async function(password){
+    return await bcrypt.compare(password,this.password); 
+}
 
 module.exports = mongoose.model("User", User);
