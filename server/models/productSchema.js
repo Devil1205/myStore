@@ -5,7 +5,7 @@ const Product = mongoose.Schema({
         required: [true,"Please enter product name"],
         trim: true
     },
-    desciption:{
+    description:{
         type: String,
         required: [true,"Please enter product description"]    
     },
@@ -54,6 +54,10 @@ const Product = mongoose.Schema({
             required: true
         }
     }],
+    user:{
+        type: mongoose.Schema.ObjectId,
+        ref: "User"
+    },
     createdAt:{
         type: Date,
         default: Date.now

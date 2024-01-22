@@ -4,6 +4,7 @@ const apiFeatures = require('../utils/apiFeatures');
 //create product route controller
 const createProduct = async (req, res, next) => {
     try {
+        req.body.user = req.user.id;
         const product = new Product(req.body);
         await product.save();
         return res.status(200).json({
@@ -12,6 +13,7 @@ const createProduct = async (req, res, next) => {
         })
     }
     catch (e) {
+        console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }

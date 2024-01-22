@@ -4,9 +4,12 @@ const port = process.env.PORT||5000;
 const env = require('dotenv');
 const connectDb = require('./db/db');
 const errorHandler = require('./middlewares/errorHandler');
+const cookieParser = require('cookie-parser');
 
 //Body parser
 app.use(express.json());
+//cookie parser
+app.use(cookieParser());
 
 //configure env path
 env.config({path: "./config/config.env"});
