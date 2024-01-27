@@ -1,0 +1,77 @@
+/* .footer{
+    position: absolute;
+    bottom: 0;
+    background-color: #07000b;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.footerColumn{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 33%;
+    min-width: 250px;
+    align-self: flex-start;
+    color: white;
+    flex-grow: 1;
+    font-size: 20px;
+} */
+
+.footerContainer{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    background-color: #07000b;
+    color: white;
+}
+
+.footerColumnHeader {
+    font-size: 30px;
+    font-weight: 500;
+    margin: 10px 0px;
+}
+
+.footer {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+}
+
+.footerColumn {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    /* width: 33%; */
+    min-width: 250px;
+    /* background-color: green; */
+}
+
+.footerColumn a:hover{
+    text-decoration: underline;
+}
+
+.downloadImage{
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.insta:hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.twitter:hover{
+    color: #00acee;
+}
+
+.facebook:hover{
+    color: #3b5998;
+}

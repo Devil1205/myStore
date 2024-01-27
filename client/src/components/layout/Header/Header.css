@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.menuBurger {
+    height: 4vmax !important;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .nav2,
+    .nav3 {
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+    .logoReactNavbar {
+        width: 200%!important;
+        max-width: 150%!important;
+    }
+
+    .linksReactNavbar {
+        font: 30px roboto!important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .logoReactNavbar {
+        max-width: 150%!important;
+    }
+
+    .linksReactNavbar {
+        font: 20px roboto!important;
+    }
+}
