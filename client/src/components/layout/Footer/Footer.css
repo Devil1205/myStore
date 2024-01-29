@@ -1,29 +1,6 @@
-/* .footer{
-    position: absolute;
-    bottom: 0;
-    background-color: #07000b;
-    width: 100%;
-    padding: 10px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.footerColumn{
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    width: 33%;
-    min-width: 250px;
-    align-self: flex-start;
-    color: white;
-    flex-grow: 1;
-    font-size: 20px;
-} */
-
 .footerContainer{
-    position: absolute;
-    bottom: 0%;
+    /* position: absolute; */
+    /* bottom: 0%; */
     width: 100%;
     background-color: #07000b;
     color: white;

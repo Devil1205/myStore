@@ -8,7 +8,7 @@ const { createProductValidation, createReviewValidation } = require('../middlewa
 router.post("/admin/product", isAuthenticatedUser, isAuthenticatedRole("admin"), createProductValidation.errors, createProductValidation.validate, createProduct);
 
 //get products route
-router.get("/products", isAuthenticatedUser, getProducts);
+router.get("/products", getProducts);
 
 //update product route -- admin
 router.put("/admin/product/:id", isAuthenticatedUser, isAuthenticatedRole("admin"), updateProduct);

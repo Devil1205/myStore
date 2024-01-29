@@ -22,7 +22,8 @@ const createProduct = async (req, res, next) => {
 const getProducts = async (req, res, next) => {
     try {
         const product = await apiFeatures.search(Product, req.query);
-        return res.status(200).json(product);
+        const productCount = await Product.countDocuments();
+        return res.status(200).json({success: true, product, productCount});
     }
     catch (e) {
         return next({ status: 500, message: "Internal Server Error" });

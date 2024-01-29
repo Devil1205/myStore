@@ -5,6 +5,9 @@ const env = require('dotenv');
 const connectDb = require('./db/db');
 const errorHandler = require('./middlewares/errorHandler');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
+app.use(cors());
 
 //Body parser
 app.use(express.json());

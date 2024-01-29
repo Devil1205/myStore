@@ -10,10 +10,11 @@ import './Header.css';
 function Header() {
     return (
         <ReactNavbar 
+            burgerColor="white"
             logo={navbarLogo}
             logoHoverSize="10px"
             logoHoverColor="#440000"
-            navColor1="rgb(255, 245, 245)"
+            navColor1="rgb(18 14 14 / 90%)"
             link1Text="Home"
             link1Url="/home"
             link2Text="About"
@@ -24,7 +25,7 @@ function Header() {
             link4Url="/contact"
             link1Size="30px"
             link1Family="roboto"
-            link1Color="black"
+            link1Color="white"
             link1ColorHover="red"
             link1Margin="10px"
             link1Paddin="5px"
