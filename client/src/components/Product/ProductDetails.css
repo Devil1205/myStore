@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap');
+
+.productContainer {
+    display: flex;
+    width: 100vw;
+    max-width: 100%;
+    padding: 10px;
+}
+
+.productContainer>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 25px;
+}
+
+.productContainer>div:last-child {
+    align-items: baseline;
+}
+
+.productImage {
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+.productBlock-1 {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.productBlock-1>div {
+    font: 400 15px 'Roboto';
+}
+
+.productBlock-2 {
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.productBlock-2>div {
+    margin-right: 8px;
+}
+
+.productBlock-3 {
+    padding: 10px 0px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.productBlock-3-1 {
+    margin: 5px 0px;
+}
+
+.productBlock-3-1-1 {
+    position: relative;
+    left: -38px;
+    margin: 5px 0px;
+}
+
+.productBlock-4 {
+    font: 600 22px 'Roboto', sans-serif;
+    padding: 15px 0px;
+}
+
+.productBlock-4>p {
+    font: 400 19px "Baloo Bhaijaan 2", sans-serif;
+}
+
+.productReviews {
+    color: black;
+    padding: 10px;
+    font: 400 17px 'Roboto';
+}
+
+.productReviews>h3 {
+    width: fit-content;
+    margin: auto;
+    padding: 10px 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.productReviews>div {
+    display: flex;
+}
+
+.productReviews .review {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.productReviews .review>div {
+    display: flex;
+    align-items: center;
+}
+
+.productReviews .review img {
+    width: 35px;
+    margin-right: 5px;
+}
+
+.productReviews .name {
+    font: 500 20px 'Roboto';
+    margin: 10px 0px;
+}
+
+.noReviews {
+    color: #7e7a7a;
+    font: 500 20px 'Roboto';
+    margin: 15px auto;
+}
+
+
+@media screen and (max-width: 740px) {
+    .productContainer {
+        flex-direction: column;
+    }
+
+    .productContainer>div {
+        margin: auto;
+    }
+}

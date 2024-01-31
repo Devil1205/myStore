@@ -23,7 +23,24 @@ const getProducts = async (req, res, next) => {
     try {
         const product = await apiFeatures.search(Product, req.query);
         const productCount = await Product.countDocuments();
-        return res.status(200).json({success: true, product, productCount});
+        return res.status(200).json({ success: true, product, productCount });
+    }
+    catch (e) {
+        return next({ status: 500, message: "Internal Server Error" });
+    }
+}
+
+//get a single product route controller
+const getProduct = async (req, res, next) => {
+    try {
+        const product = await Product.findById(req.params.id);
+
+        //if no product found, return error
+        if (!product) {
+            return next({ status: 400, message: "Product not found" });
+        }
+
+        return res.status(200).json({ success: true, product });
     }
     catch (e) {
         return next({ status: 500, message: "Internal Server Error" });
@@ -161,7 +178,7 @@ const deleteReview = async (req, res, next) => {
             return next({ status: 403, message: "Only own reviews are permitted to delete" });
 
         product.reviews.splice(reviewInd, 1);
-        product.numberOfReviews-=1;
+        product.numberOfReviews -= 1;
 
         //update product average rating
         let avgRating = 0;
@@ -177,4 +194,4 @@ const deleteReview = async (req, res, next) => {
     }
 }
 
-module.exports = { getProducts, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, deleteReview };
+module.exports = { getProducts, getProduct, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, deleteReview };

@@ -10,7 +10,7 @@ import './Header.css';
 function Header() {
     return (
         <ReactNavbar 
-            burgerColor="white"
+            burgerColor="#ffa6a6"
             logo={navbarLogo}
             logoHoverSize="10px"
             logoHoverColor="#440000"
