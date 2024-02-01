@@ -3,7 +3,7 @@ import './ProductDetails.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader.jsx';
 import { useAlert } from 'react-alert';
-import { getProductDetails } from '../../actions/productAction';
+import { clearErrors, getProductDetails } from '../../actions/productAction';
 import { useParams } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
-import Review from './Review.jsx';
+import Review from './ReviewCard.jsx';
 
 
 function ProductDetails() {
@@ -31,11 +31,13 @@ function ProductDetails() {
 
     useEffect(() => {
         if (error)
-            return alert.error(error);
+        {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
         dispatch(getProductDetails(id));
-    }, [dispatch, error]);
+    }, [dispatch, error, alert]);
 
-    console.log(product.images);
     return (
         loading ? <Loader /> : <>
             <div className='productContainer'>
@@ -48,7 +50,7 @@ function ProductDetails() {
                     >
                         {product.images && product.images.map((elem, ind) => {
                             return (
-                                <img className='productImage' src={elem.url} alt={elem.name} />
+                                <img key={ind} className='productImage' src={elem.url} alt={elem.name} />
                             )
                         })}
                     </Carousel>

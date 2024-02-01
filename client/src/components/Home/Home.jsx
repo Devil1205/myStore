@@ -1,24 +1,28 @@
 import React, { useEffect } from 'react';
 import './Home.css';
 import { CiDesktopMouse2 } from "react-icons/ci";
-import Product from './Product.jsx';
 import { HashLink } from 'react-router-hash-link';
 import MetaData from '../layout/MetaData.jsx';
-import { getProduct } from '../../actions/productAction.jsx';
+import { clearErrors, getProduct } from '../../actions/productAction.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader.jsx';
 import { useAlert } from 'react-alert';
+import ProductCard from './ProductCard.jsx';
+import Typewriter from 'typewriter-effect';
 
 function Home() {
     const alert = useAlert();
     const dispatch = useDispatch();
+    const bannerMessages = ["Wide range of Products", "Fast and Free Delivery", "Best Price Offers", "Secure Payment Environment"]
     const { loading, error, products, productsCount } = useSelector(state => state.products);
 
     useEffect(() => {
-        if(error)
-            return alert.error(error);
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
         dispatch(getProduct(dispatch));
-    }, [dispatch, error])
+    }, [dispatch, error, alert])
 
     return (
         loading ? <Loader /> :
@@ -29,6 +33,18 @@ function Home() {
                     <h1>Welcome to myStore</h1>
                     <p>enjoy the premium quality products</p>
                     <HashLink to="#home-scroll" className='my-2'><button className="homeScrollButton">Scroll {<CiDesktopMouse2 />}</button></HashLink>
+                    <div>
+                        <Typewriter
+                            options={{
+                                strings: bannerMessages,
+                                autoStart: true,
+                                delay: 40,
+                                deleteSpeed: 3,
+                                loop: true,
+                            }}
+
+                        />
+                    </div>
                 </div>
 
                 <h2 className="homeHeading" id="home-scroll">
@@ -37,7 +53,7 @@ function Home() {
                 <div className="homeContainer">
 
                     {products && products.map((elem, ind) => {
-                        return (<Product key={ind} product={elem} />)
+                        return (<ProductCard key={ind} product={elem} />)
                     })}
 
                 </div>

@@ -83,12 +83,14 @@
 
 .productReviews>div {
     display: flex;
+    overflow: auto;
 }
 
 .productReviews .review {
     display: flex;
     flex-direction: column;
     margin: 10px;
+    white-space: nowrap;
 }
 
 .productReviews .review>div {
