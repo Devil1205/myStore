@@ -3,13 +3,15 @@ import './Search.css';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from 'react-router-dom';
 
 function Search() {
 
+    const navigate = useNavigate();
     const handleProductSearch = (e) => {
         e.preventDefault();
         const data = document.getElementById('searchProducts');
-        console.log(data.value);
+        navigate(`/products?search=${data.value}`);
     }
 
     return (

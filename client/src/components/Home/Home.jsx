@@ -21,7 +21,7 @@ function Home() {
             alert.error(error);
             dispatch(clearErrors());
         }
-        dispatch(getProduct(dispatch));
+        dispatch(getProduct());
     }, [dispatch, error, alert])
 
     return (
@@ -33,14 +33,16 @@ function Home() {
                     <h1>Welcome to myStore</h1>
                     <p>enjoy the premium quality products</p>
                     <HashLink to="#home-scroll" className='my-2'><button className="homeScrollButton">Scroll {<CiDesktopMouse2 />}</button></HashLink>
-                    <div>
+                    <div className='my-4'>
+                        <div className='text-center my-3'>We Provide</div>
                         <Typewriter
                             options={{
                                 strings: bannerMessages,
                                 autoStart: true,
-                                delay: 40,
-                                deleteSpeed: 3,
+                                delay: 45,
+                                deleteSpeed: 20,
                                 loop: true,
+                                pauseFor: 2000
                             }}
 
                         />

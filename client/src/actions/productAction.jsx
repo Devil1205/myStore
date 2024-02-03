@@ -5,11 +5,13 @@ import {
 } from '../constants/productContants';
 const backend = "http://localhost:5000";
 
-export const getProduct = () => async (dispatch) => {
+export const getProduct = (keyword = "", page = 1, limit = 8) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
 
-        const { data } = await axios.get(backend + "/api/v1/products");
+        let link = `${backend}/api/v1/products?search=${keyword}&page=${page}&limit=${limit}`;
+        console.log(link);
+        const { data } = await axios.get(link);
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
             payload: data

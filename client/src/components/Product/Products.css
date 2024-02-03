@@ -1,0 +1,20 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin: 0px 10px;
+}
+
+.productsPerPage{
+    display: flex;
+    flex-wrap: wrap;        
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    margin-left: 20px;
+}
+
+.productsPerPage span{
+    font: 500 15px "Roboto", sans-serif;
+    margin: 5px;
+    white-space: nowrap;
+}

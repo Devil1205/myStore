@@ -25,8 +25,19 @@
     z-index: -1;
 }
 
+.banner > h1{
+    font: 700 calc(28px + 1vw) "Josefin Sans", sans-serif;
+    margin: 10px 0px;
+}
+
 .banner p{
-    font: 500 calc(13px + 0.5vw) "Josefin Sans", sans-serif;
+    font: 500 calc(15px + 1vw) "Josefin Sans", sans-serif;
+    margin: 20px 0px;
+}
+
+.banner > div {
+    font: 500 23px "Josefin Sans", sans-serif;
+    text-decoration: wavy;
 }
 
 .homeScrollButton{
@@ -36,6 +47,7 @@
     padding: 8px 16px;
     border-radius: 35px;
     transition: 0.5s ease-in-out all;
+    margin-top: 10px;
 }
 
 .homeScrollButton:hover{
