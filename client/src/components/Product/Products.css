@@ -1,20 +1,145 @@
-.pagination{
+.productPagination {
     display: flex;
     justify-content: center;
     margin: 0px 10px;
 }
 
-.productsPerPage{
+.productsPerPage {
     display: flex;
-    flex-wrap: wrap;        
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     height: fit-content;
     margin-left: 20px;
 }
 
-.productsPerPage span{
+.productsPerPage span {
     font: 500 15px "Roboto", sans-serif;
     margin: 5px;
     white-space: nowrap;
+}
+
+.prevLink,.nextLink,.pageLink{
+    display: flex;
+    height: 38px;
+    align-items: center;
+    padding: 0px 10px;
+    color: black;
+    background-color: #e4cdc9;
+    font: 400 15px 'Roboto';
+}
+
+.prevLink{
+    border-radius: 5px 0px 0px 5px;
+    background-color: #ff775e;
+}
+
+.nextLink{
+    border-radius: 0px 5px 5px 0px;
+    background-color: #ff775e;
+}
+
+.pageLink{
+    padding: 0px 15px;
+}
+
+.prevItem.disabled > .prevLink, .nextItem.disabled > .nextLink{
+    background-color: #ffe0db;
+    cursor: not-allowed;
+}
+
+.nextLink:hover, .prevLink:hover{
+    background-color: rgb(234, 70, 42);
+}
+
+.pageItem.active > .pageLink{
+    background-color: rgb(234, 70, 42);
+}
+
+.pageLink:hover{
+    background-color: tomato;
+}
+
+
+.filtersContainer {
+    width: fit-content;
+    position: absolute;
+    right: 20px;
+}
+
+#filterIcon {
+    font-size: 30px;
+    color: tomato;
+    cursor: pointer;
+}
+
+#filterIcon:hover {
+    color: rgb(234, 70, 42);
+}
+
+.filters {
+    width: 200px;
+    height: 0;
+    background: #ffeeeb;
+    padding: 0;
+    position: absolute;
+    left: -180px;
+    z-index: 1;
+    overflow: hidden;
+    transition: 0.5s ease-in-out all;
+    border-radius: 5px;
+}
+
+.filters>div {
+    display: flex;
+    width: 100%;
+    /* text-align: center; */
+    flex-direction: column;
+    font: 500 15px 'Roboto';
+}
+
+.categories {
+    margin-top: 40px;
+}
+
+.categories > div:nth-child(2){
+    margin: 8px 0px;
+}
+
+.filterButtons{
+    flex-direction: row!important;
+    margin: 10px 0px;
+}
+
+.filterButton{
+    background-color: tomato!important;
+    margin: 0px 10px!important;
+}
+
+.filterButton:hover{
+    background-color: rgb(234, 70, 42)!important;
+}
+
+.MuiSlider-root > span > span {
+    font: 500 13px 'Roboto';
+    background-color: transparent!important;
+    color: grey!important;
+    top: 45px!important;
+}
+
+.MuiSlider-root > span:nth-child(4) > span {
+    top: -5px!important;
+}
+
+@media screen and (max-width: 500px) {
+    #filterIcon {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 337px) {
+    .productPagination {
+        flex-direction: column;
+        align-items: center;
+    }
 }
