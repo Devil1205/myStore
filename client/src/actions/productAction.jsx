@@ -5,11 +5,12 @@ import {
 } from '../constants/productContants';
 const backend = "http://localhost:5000";
 
-export const getProduct = (keyword = "", page = 1, limit = 8, price = [0, 100000], category = "") => async (dispatch) => {
+export const getProduct = (keyword = "", page = 1, limit = 8, price = [0, 100000], category = "", rating = 0) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
 
-        let link = `${backend}/api/v1/products?search=${keyword}&category=${category}&page=${page}&limit=${limit}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+        let link = `${backend}/api/v1/products?search=${keyword}&category=${category}&page=${page}&limit=${limit}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${rating}`;
+        console.log(link);
         const { data } = await axios.get(link);
         dispatch({
             type: ALL_PRODUCT_SUCCESS,

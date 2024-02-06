@@ -11,3 +11,36 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.MuiSlider-root > span > span {
+    font: 500 13px 'Roboto';
+    background-color: transparent!important;
+    color: grey!important;
+    top: 35px!important;
+}
+
+.MuiSlider-root > span:nth-child(4) > span {
+    top: 0px!important;
+}
+
+.MuiSlider-root > span.Mui-focusVisible {
+    box-shadow: none;
+}
+
+.MuiSlider-root > span:nth-child(3).Mui-active, .MuiSlider-root > span:nth-child(3):hover {
+    box-shadow: 0px 0px 0px 5px #ff63473d;
+}
+
+.MuiSlider-root > span:nth-child(4).Mui-active, .MuiSlider-root > span:nth-child(4):hover {
+    box-shadow: 0px 0px 0px 5px #ff63473d;
+}
+
+body{
+    background-color: #ffefec;
+}
+
+.h-100vh{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

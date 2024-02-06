@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
 import Review from './ReviewCard.jsx';
+import MetaData from '../layout/MetaData.jsx';
 
 
 function ProductDetails() {
@@ -40,6 +41,7 @@ function ProductDetails() {
 
     return (
         loading ? <Loader /> : <>
+        <MetaData title={`${product.name} - myStore`} />
             <div className='productContainer'>
 
                 <div>

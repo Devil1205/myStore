@@ -21,9 +21,9 @@ const createProduct = async (req, res, next) => {
 //get products route controller
 const getProducts = async (req, res, next) => {
     try {
-        const product = await apiFeatures.search(Product, req.query);
-        const productCount = await Product.countDocuments();
-        return res.status(200).json({ success: true, product, productCount });
+        const { product, filteredProductCount } = await apiFeatures.search(Product, req.query);
+        const totalProductCount = await Product.countDocuments();
+        return res.status(200).json({ success: true, product, totalProductCount, filteredProductCount });
     }
     catch (e) {
         return next({ status: 500, message: "Internal Server Error" });

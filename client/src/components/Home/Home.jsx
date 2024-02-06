@@ -14,7 +14,7 @@ function Home() {
     const alert = useAlert();
     const dispatch = useDispatch();
     const bannerMessages = ["Wide range of Products", "Fast and Free Delivery", "Best Price Offers", "Secure Payment Environment"]
-    const { loading, error, products, productsCount } = useSelector(state => state.products);
+    const { loading, error, products } = useSelector(state => state.products);
 
     useEffect(() => {
         if (error) {

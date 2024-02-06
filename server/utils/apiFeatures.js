@@ -14,18 +14,20 @@ const search = async (resultsArray, query) => {
         name: { "$regex": query.search, "$options": "i" },
         ...queryCopy
     } : { ...queryCopy };
-    
+
     search = query.category ? {
         category: query.category,
         ...search
     } : { ...search }
-    
+
     //pagination part
     const currPage = query.page || 1;
     const itemsPerPage = query.limit || 5;
     const skip = (currPage - 1) * itemsPerPage;
     // console.log(search);
-    return await resultsArray.find({ ...search }).skip(skip).limit(itemsPerPage);
+    const product = await resultsArray.find({ ...search }).skip(skip).limit(itemsPerPage);
+    const filteredProductCount = await resultsArray.countDocuments({ ...search });
+    return {product,filteredProductCount};
 }
 
 module.exports = { search };

@@ -19,7 +19,9 @@
     white-space: nowrap;
 }
 
-.prevLink,.nextLink,.pageLink{
+.prevLink,
+.nextLink,
+.pageLink {
     display: flex;
     height: 38px;
     align-items: center;
@@ -29,34 +31,36 @@
     font: 400 15px 'Roboto';
 }
 
-.prevLink{
+.prevLink {
     border-radius: 5px 0px 0px 5px;
     background-color: #ff775e;
 }
 
-.nextLink{
+.nextLink {
     border-radius: 0px 5px 5px 0px;
     background-color: #ff775e;
 }
 
-.pageLink{
+.pageLink {
     padding: 0px 15px;
 }
 
-.prevItem.disabled > .prevLink, .nextItem.disabled > .nextLink{
+.prevItem.disabled>.prevLink,
+.nextItem.disabled>.nextLink {
     background-color: #ffe0db;
     cursor: not-allowed;
 }
 
-.nextLink:hover, .prevLink:hover{
+.nextLink:hover,
+.prevLink:hover {
     background-color: rgb(234, 70, 42);
 }
 
-.pageItem.active > .pageLink{
+.pageItem.active>.pageLink {
     background-color: rgb(234, 70, 42);
 }
 
-.pageLink:hover{
+.pageLink:hover {
     background-color: tomato;
 }
 
@@ -84,10 +88,11 @@
     padding: 0;
     position: absolute;
     left: -180px;
-    z-index: 1;
+    z-index: 2;
     overflow: hidden;
     transition: 0.5s ease-in-out all;
     border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px black;
 }
 
 .filters>div {
@@ -99,36 +104,58 @@
 }
 
 .categories {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
-.categories > div:nth-child(2){
-    margin: 8px 0px;
+.categories>div:nth-child(2),
+.rating>div:nth-child(2) {
+    margin-top: 8px;
 }
 
-.filterButtons{
-    flex-direction: row!important;
+.filterButtons {
+    flex-direction: row !important;
     margin: 10px 0px;
 }
 
-.filterButton{
-    background-color: tomato!important;
-    margin: 0px 10px!important;
+.filterButton {
+    background-color: tomato !important;
+    margin: 0px 10px !important;
 }
 
-.filterButton:hover{
-    background-color: rgb(234, 70, 42)!important;
+.filterButton:hover {
+    background-color: rgb(234, 70, 42) !important;
 }
 
-.MuiSlider-root > span > span {
-    font: 500 13px 'Roboto';
-    background-color: transparent!important;
-    color: grey!important;
-    top: 45px!important;
+.rating {
+    margin-top: 20px;
 }
 
-.MuiSlider-root > span:nth-child(4) > span {
-    top: -5px!important;
+.appliedFilters {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    border-radius: 50px;
+    font: 500 15px 'Roboto';
+}
+
+.appliedFilters>div {
+    margin: 0px 15px;
+    background: white;
+    border-radius: 20px;
+    width: 130px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.appliedFilters>div>span {
+    position: relative;
+    top: -6px;
+    left: 5px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {

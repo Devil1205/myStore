@@ -26,7 +26,7 @@ function Header() {
             link1Size="30px"
             link1Family="roboto"
             link1Color="white"
-            link1ColorHover="red"
+            link1ColorHover="tomato"
             link1Margin="10px"
             link1Paddin="5px"
             searchIcon
