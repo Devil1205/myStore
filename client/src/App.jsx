@@ -7,8 +7,17 @@ import Home from './components/Home/Home';
 import ProductDetails from './components/Product/ProductDetails';
 import Products from './components/Product/Products';
 import Search from './components/Product/Search';
+import LoginSignup from './components/User/LoginSignup';
+import { useEffect } from 'react';
+import store from './store';
+import { loadUser } from './actions/userAction';
 
 function App() {
+
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, [])
+  
 
   return (
     <>
@@ -20,6 +29,7 @@ function App() {
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/search" element={<Search />} />
+          <Route exact path="/login" element={<LoginSignup />} />
         </Routes>
         <Footer />
       </Router>

@@ -14,7 +14,7 @@ function Header() {
             logo={navbarLogo}
             logoHoverSize="10px"
             logoHoverColor="#440000"
-            navColor1="rgb(18 14 14 / 90%)"
+            navColor1="rgb(27 0 0 / 89%)"
             link1Text="Home"
             link1Url="/home"
             link2Text="Products"
@@ -42,6 +42,7 @@ function Header() {
             cartIconMargin="10px"
             CartIconElement={ShoppingCartIcon}
             profileIcon
+            profileIconUrl="/login"
             profileIconColor="#0d6efd"
             profileIconColorHover="rgb(4 69 164)"
             profileIconSize="large"

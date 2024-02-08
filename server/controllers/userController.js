@@ -2,12 +2,18 @@ const User = require('../models/userSchema');
 const storeJWTToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
+const cloudinary = require('cloudinary');
 
 //register user
 const registerUser = async (req, res, next) => {
 
     try {
         const { name, email, password, avatar } = req.body;
+        const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+            folder: "avatars",
+            width: 150,
+            crop: "scale"
+        });
         let user = await User.findOne({ email });
         if (user)
             return next({ status: 409, message: "Email is already registered" });
@@ -15,7 +21,10 @@ const registerUser = async (req, res, next) => {
             name,
             email,
             password,
-            avatar
+            avatar: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            }
         });
         await user.save();
         await storeJWTToken(user, 201, "User created successfully", res);
