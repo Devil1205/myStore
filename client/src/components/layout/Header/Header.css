@@ -4,6 +4,58 @@
     height: 4vmax !important;
 }
 
+.userOptions{
+    font: 500 20px 'Roboto';
+    min-height: 100vh;
+    min-width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.userOptions > div{
+    background-color: #ffffff6e;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 3px 3px 6px 0px black;
+    border-radius: 10px;
+}
+
+.userOptions>div>div{
+    margin: 50px 0px 25px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.userOptions>div>div>a{
+    color: black;
+    padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid grey;
+}
+
+.userOptions>div>div>a:hover{
+    background-color: rgb(234, 234, 234);
+}
+
+.userOptions img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+#profileIcon{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
 @media screen and (max-width: 1000px) {
 
     .nav2,

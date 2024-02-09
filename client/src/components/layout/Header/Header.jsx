@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ReactNavbar } from "overlay-navbar";
 import navbarLogo from '../../../Images/navbarLogo2.png';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import './Header.css';
-
+import { useSelector } from 'react-redux';
 
 function Header() {
+
+    const { isAuthenticated, user } = useSelector((state) => state.user);
+
+    useEffect(() => {
+        const avatar = document.getElementById("profileIcon");
+        avatar.src = isAuthenticated?user.avatar.url:"/profile.png";
+    }, [isAuthenticated])
+    
+
     return (
         <ReactNavbar 
             burgerColor="#ffa6a6"
@@ -47,7 +55,7 @@ function Header() {
             profileIconColorHover="rgb(4 69 164)"
             profileIconSize="large"
             profileIconMargin="10px"
-            ProfileIconElement={AccountCircleIcon}
+            ProfileIconElement="img"
         />
     )
 }

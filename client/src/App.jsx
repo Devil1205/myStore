@@ -11,13 +11,14 @@ import LoginSignup from './components/User/LoginSignup';
 import { useEffect } from 'react';
 import store from './store';
 import { loadUser } from './actions/userAction';
+import UserOptions from './components/layout/Header/userOptions';
 
 function App() {
 
   useEffect(() => {
     store.dispatch(loadUser());
   }, [])
-  
+
 
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/login" element={<LoginSignup />} />
+          <Route exact path="/account" element={<UserOptions />} />
         </Routes>
         <Footer />
       </Router>

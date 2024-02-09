@@ -8,7 +8,7 @@ const storeJWTToken = async (user, statusCode, message, res) => {
     return res.status(statusCode).cookie('token',token,cookieOptions).json({
         success: true,
         message,
-        token
+        token,
     })
 }
 
