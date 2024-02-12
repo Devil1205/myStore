@@ -12,8 +12,10 @@ import { useEffect } from 'react';
 import store from './store';
 import { loadUser } from './actions/userAction';
 import UserOptions from './components/layout/Header/userOptions';
+import Profile from './components/User/Profile';
 
 function App() {
+
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -31,7 +33,8 @@ function App() {
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/login" element={<LoginSignup />} />
-          <Route exact path="/account" element={<UserOptions />} />
+          <Route exact path="/user" element={<UserOptions />} />
+          <Route exact path="/user/profile" element={<Profile />} />
         </Routes>
         <Footer />
       </Router>

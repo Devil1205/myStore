@@ -9,6 +9,7 @@ const storeJWTToken = async (user, statusCode, message, res) => {
         success: true,
         message,
         token,
+        user
     })
 }
 

@@ -74,7 +74,7 @@ function LoginSignup() {
         }
 
         if (isAuthenticated)
-            navigate("/account");
+            navigate("/user");
 
     }, [dispatch, error, alert, isAuthenticated])
 

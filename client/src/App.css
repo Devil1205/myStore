@@ -44,3 +44,18 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+.myStoreBtn{
+    width: 100%;
+    margin: 25px 0px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: rgb(255, 79, 48);
+    color: white;
+    border: none;
+    font-size: 17px;
+}
+
+.myStoreBtn:hover{
+    background-color: rgb(214, 70, 44);
+}

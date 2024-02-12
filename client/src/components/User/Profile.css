@@ -1,0 +1,52 @@
+.profileContainer {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffefec;
+    padding: 20px;
+    display: flex;
+}
+
+.profileContainer > div{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 900px;
+    margin: auto;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.profileSection-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profileSection-1>img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.profileSection-2 {
+    display: flex;
+    flex-direction: column;
+    font: 400 calc(12px + .4vw) 'Roboto';
+    margin: 0px 20px;
+}
+
+.profileSection-2>div>p {
+    color: gray;
+}
+
+@media screen and (max-width: 600px) {
+
+    .profileContainer>div{
+        flex-direction: column;
+        max-height: 600px;
+        min-height: 400px;
+        height: 100vh;
+    }
+}

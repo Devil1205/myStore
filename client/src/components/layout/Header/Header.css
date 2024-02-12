@@ -10,11 +10,12 @@
     min-width: 100%;
     display: grid;
     place-items: center;
+    padding: 10px 0px;
 }
 
 .userOptions > div{
     background-color: #ffffff6e;
-    width: 350px;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,6 +23,7 @@
     padding: 20px;
     box-shadow: 3px 3px 6px 0px black;
     border-radius: 10px;
+    max-width: 350px;
 }
 
 .userOptions>div>div{
@@ -32,14 +34,15 @@
     align-items: center;
 }
 
-.userOptions>div>div>a{
+.userOptions>div>div>a, .userOptions>div>div>div{
     color: black;
     padding: 10px;
     width: 100%;
     border-bottom: 1px solid grey;
+    cursor: pointer;
 }
 
-.userOptions>div>div>a:hover{
+.userOptions>div>div>a:hover, .userOptions>div>div>div:hover{
     background-color: rgb(234, 234, 234);
 }
 
