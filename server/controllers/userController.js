@@ -180,7 +180,21 @@ const updateProfile = async (req, res, next) => {
         const { name, avatar } = req.body;
         const user = await User.findById(req.user.id);
         user.name = name;
-        user.avatar = avatar;
+        console.log(avatar);
+        if (avatar !== '') {
+            const public_id = user.avatar.public_id;
+            await cloudinary.v2.destroy(public_id);
+            const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+                folder: "avatars",
+                width: 150,
+                crop: "scale"
+            });
+            user.avatar = {
+                public_id: myCloud.public_id,
+                url: myCloud.url
+            }
+
+        }
         await user.save();
         return res.status(200).json({ success: true, message: "Profile updated successfully" });
     }
@@ -244,7 +258,7 @@ const updateUserRole = async (req, res, next) => {
 //delete user -- admin
 const deleteUser = async (req, res, next) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const user = await User.findByIdAndDelete(id);
         if (!user)
             return next({ status: 404, message: `User does not exist with id: ${id}` });

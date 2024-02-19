@@ -2,10 +2,12 @@ import React from 'react';
 import './Profile.css';
 import { useSelector } from 'react-redux';
 import MetaData from '../layout/MetaData';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
 
     const { user } = useSelector(state => state.user);
+    const navigate = useNavigate();
 
     return (
         <div className='profileContainer'>
@@ -13,7 +15,7 @@ function Profile() {
             <div>
                 <div className="profileSection-1">
                     <img src={user.avatar.url} alt={user.name} />
-                    <button className='myStoreBtn'>Edit Profile</button>
+                    <button className='myStoreBtn' onClick={()=>{navigate("/user/profile/update")}}>Edit Profile</button>
 
                 </div>
                 <div className="profileSection-2">
@@ -27,7 +29,7 @@ function Profile() {
                     </div>
                     <div>
                         <h3>Date Joined</h3>
-                        <p>{user.createdAt}</p>
+                        <p>{new Date(user.createdAt).toLocaleDateString("en-GB").replace(/\//g, '-')}</p>
                     </div>
                 </div>
             </div>

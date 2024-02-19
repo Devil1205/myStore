@@ -13,6 +13,8 @@ import store from './store';
 import { loadUser } from './actions/userAction';
 import UserOptions from './components/layout/Header/userOptions';
 import Profile from './components/User/Profile';
+import ProtectedRoute from './components/route/ProtectedRoute';
+import UpdateProfile from './components/User/UpdateProfile';
 
 function App() {
 
@@ -33,8 +35,11 @@ function App() {
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/login" element={<LoginSignup />} />
-          <Route exact path="/user" element={<UserOptions />} />
-          <Route exact path="/user/profile" element={<Profile />} />
+          <Route element={<ProtectedRoute />} >
+            <Route exact path="/user" element={<UserOptions />} />
+            <Route exact path={"/user/profile"} element={<Profile />} />
+            <Route exact path={"/user/profile/update"} element={<UpdateProfile />} />
+          </Route>
         </Routes>
         <Footer />
       </Router>

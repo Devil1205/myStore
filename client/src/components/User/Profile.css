@@ -6,7 +6,7 @@
     display: flex;
 }
 
-.profileContainer > div{
+.profileContainer>div {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -37,13 +37,17 @@
     margin: 0px 20px;
 }
 
+.profileSection-2>div {
+    margin: 10px 0px;
+}
+
 .profileSection-2>div>p {
     color: gray;
 }
 
 @media screen and (max-width: 600px) {
 
-    .profileContainer>div{
+    .profileContainer>div {
         flex-direction: column;
         max-height: 600px;
         min-height: 400px;

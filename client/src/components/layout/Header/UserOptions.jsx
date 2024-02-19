@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Header.css';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../Loader/Loader';
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from 'react-router-dom';
 import { logout, clearErrors } from '../../../actions/userAction';
@@ -9,8 +8,8 @@ import { useAlert } from 'react-alert';
 
 function UserOptions() {
 
-    const { user, isAuthenticated, loading, error } = useSelector((state) => state.user);
-    const [userImage, setUserImage] = useState("/profile.png");
+    const { user, error } = useSelector((state) => state.user);
+    const [userImage, setUserImage] = useState(user.avatar.url);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const alert = useAlert();
@@ -21,28 +20,7 @@ function UserOptions() {
         navigate("/login");
     }
 
-    useEffect(() => {
-
-        if (isAuthenticated) {
-            setUserImage(user.avatar.url);
-        }
-        else if (loading === false) {
-            if (error) {
-                alert.error(error);
-                dispatch(clearErrors());
-            }
-            else {
-                alert.error("Please login");
-            }
-            navigate("/login");
-        }
-
-    }, [dispatch, isAuthenticated, alert, error])
-
-
     return (
-        loading || isAuthenticated === false ?
-            <Loader /> :
             <>
                 <div className="userOptions">
                     <div>

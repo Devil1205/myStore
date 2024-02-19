@@ -118,6 +118,8 @@
 .registerImage > img{
     width: 40px;
     margin-right: 10px;
+    border-radius: 100%;
+    height: 40px;
 }
 
 .registerImage > input{

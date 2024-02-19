@@ -40,6 +40,10 @@ const User = new mongoose.Schema({
         type: String,
         default: "user"
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date
 });
@@ -49,27 +53,27 @@ User.pre("save", async function (next) {
     if (!this.isModified("password")) {
         next();
     }
-    this.password = await bcrypt.hash(this.password,10);
+    this.password = await bcrypt.hash(this.password, 10);
     next();
 })
 
 //to generate and return jwt token
-User.methods.getJWTToken = function(){
-    const token = jwt.sign({id: this._id},JWT_SECRET,{expiresIn: JWT_EXPIRY});
+User.methods.getJWTToken = function () {
+    const token = jwt.sign({ id: this._id }, JWT_SECRET, { expiresIn: JWT_EXPIRY });
     return token;
 }
 
 //to verify the password
-User.methods.comparePassword = async function(password){
-    return await bcrypt.compare(password,this.password); 
+User.methods.comparePassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
 }
 
 //to generate password reset token
-User.methods.getResetToken = function(){
+User.methods.getResetToken = function () {
     const token = crypto.randomBytes(20).toString("hex");
     const cryptToken = crypto.createHash("sha256").update(token).digest("hex");
     this.resetPasswordToken = cryptToken;
-    this.resetPasswordExpire = new Date(Date.now() + 15*60*1000);
+    this.resetPasswordExpire = new Date(Date.now() + 15 * 60 * 1000);
     return token;
 }
 
