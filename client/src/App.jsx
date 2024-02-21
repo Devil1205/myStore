@@ -15,6 +15,7 @@ import UserOptions from './components/layout/Header/userOptions';
 import Profile from './components/User/Profile';
 import ProtectedRoute from './components/route/ProtectedRoute';
 import UpdateProfile from './components/User/UpdateProfile';
+import UpdatePassword from './components/User/UpdatePassword';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             <Route exact path="/user" element={<UserOptions />} />
             <Route exact path={"/user/profile"} element={<Profile />} />
             <Route exact path={"/user/profile/update"} element={<UpdateProfile />} />
+            <Route exact path={"/user/password/update"} element={<UpdatePassword />} />
           </Route>
         </Routes>
         <Footer />

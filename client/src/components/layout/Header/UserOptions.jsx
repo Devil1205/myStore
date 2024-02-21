@@ -5,6 +5,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from 'react-router-dom';
 import { logout, clearErrors } from '../../../actions/userAction';
 import { useAlert } from 'react-alert';
+import MetaData from '../MetaData';
 
 function UserOptions() {
 
@@ -23,6 +24,7 @@ function UserOptions() {
     return (
             <>
                 <div className="userOptions">
+                <MetaData title={`myStore - ${user.name}`} />
                     <div>
                         <img src={userImage} alt={user.name} />
                         {user.role === "admin" && <span className='text-danger'>admin</span>}
@@ -37,9 +39,6 @@ function UserOptions() {
                             </Link>
                             <Link to="/orders">
                                 Orders <IoIosArrowForward />
-                            </Link>
-                            <Link to="/security">
-                                Privacy and Security <IoIosArrowForward />
                             </Link>
                             <div onClick={handleLogout}>
                                 Logout <IoIosArrowForward />

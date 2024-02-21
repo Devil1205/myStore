@@ -66,7 +66,7 @@ function UpdateProfile() {
     return (
         < div className='loginSignupContainer' >
             <div className="loginSignupBox">
-                <MetaData title={`${user.name} - Update`} />
+                <MetaData title={`${user.name} - Update Profile`} />
 
 
                 <form className="loginForm" encType='multipart/form-data' onSubmit={submitSignupForm}>

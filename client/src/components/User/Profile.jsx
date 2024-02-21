@@ -2,7 +2,7 @@ import React from 'react';
 import './Profile.css';
 import { useSelector } from 'react-redux';
 import MetaData from '../layout/MetaData';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Profile() {
 
@@ -11,7 +11,7 @@ function Profile() {
 
     return (
         <div className='profileContainer'>
-            <MetaData title={`myStore - ${user.name}`} />
+            <MetaData title={`${user.name} - Profile`} />
             <div>
                 <div className="profileSection-1">
                     <img src={user.avatar.url} alt={user.name} />
@@ -30,6 +30,9 @@ function Profile() {
                     <div>
                         <h3>Date Joined</h3>
                         <p>{new Date(user.createdAt).toLocaleDateString("en-GB").replace(/\//g, '-')}</p>
+                    </div>
+                    <div>
+                        <Link to="/user/password/update" className='myStoreBtn2'>Change Password</Link>
                     </div>
                 </div>
             </div>

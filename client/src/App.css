@@ -59,3 +59,18 @@ body{
 .myStoreBtn:hover{
     background-color: rgb(214, 70, 44);
 }
+
+.myStoreBtn2{
+    width: 100%;
+    margin: 25px 0px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: rgb(136 136 136);
+    color: white;
+    border: none;
+    font-size: 17px;
+}
+
+.myStoreBtn2:hover{
+    background-color: rgb(100, 100, 100);
+}
