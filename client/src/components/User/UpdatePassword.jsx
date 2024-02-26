@@ -7,8 +7,10 @@ import { clearErrors, updatePassword } from '../../actions/profileAction';
 import { useAlert } from 'react-alert';
 import MetaData from '../layout/MetaData';
 import { loadUser } from '../../actions/userAction';
-import { UPDATE_PASSWORD_RESET } from '../../constants/profileContstants';
+import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 function UpdatePassword() {
     const dispatch = useDispatch();
@@ -56,7 +58,7 @@ function UpdatePassword() {
                 <form className="loginForm" encType='multipart/form-data' onSubmit={submitSignupForm}>
                     <h3 className='text-center mb-5'>Change Password</h3>
                     <div className="loginPassword">
-                        <LockOpenOutlinedIcon />
+                        <VpnKeyIcon />
                         <input type="password" placeholder="Old Password" value={oldPassword} name="password" onChange={(e) => { setOldPassword(e.target.value) }} />
                     </div>
                     <div className="loginPassword">
@@ -64,7 +66,7 @@ function UpdatePassword() {
                         <input type="password" placeholder="New Password" value={newPassword} name="password" onChange={(e) => { setNewPassword(e.target.value) }} />
                     </div>
                     <div className="loginPassword">
-                        <LockOpenOutlinedIcon />
+                        <LockOutlinedIcon />
                         <input type="password" placeholder="Confirm Password" value={confirmPassword} name="password" onChange={(e) => { setConfirmPassword(e.target.value) }} />
                     </div>
                     <button className="signupSubmit" type='submit' >Change Password</button>

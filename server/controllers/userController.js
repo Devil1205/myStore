@@ -85,7 +85,8 @@ const forgotPassword = async (req, res, next) => {
         const token = user.getResetToken();
         await user.save({ validateBeforeSave: false });
 
-        const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${token}`;
+        // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${token}`;
+        const resetPasswordUrl = `http://localhost:5173/#/password/reset/${token}`;
         const message = `Your password reset link is : \n\n ${resetPasswordUrl} \n\n<b>Important: This link is only valid for 15 minutes, do not share it with anyone otherwise your account security may be compromised.</b>`;
 
         try {

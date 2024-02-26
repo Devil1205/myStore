@@ -9,7 +9,7 @@ import { updateProfile, clearErrors } from '../../actions/profileAction';
 import { useAlert } from 'react-alert';
 import MetaData from '../layout/MetaData';
 import { loadUser } from '../../actions/userAction';
-import { UPDATE_PROFILE_RESET } from '../../constants/profileContstants';
+import { UPDATE_PROFILE_RESET } from '../../constants/userConstants';
 
 function UpdateProfile() {
 

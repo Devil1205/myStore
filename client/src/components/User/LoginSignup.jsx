@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, register, clearErrors } from '../../actions/userAction';
 import { useAlert } from 'react-alert';
 import Loader from '../layout/Loader/Loader';
+import MetaData from '../layout/MetaData';
 
 function LoginSignup() {
 
@@ -84,6 +85,7 @@ function LoginSignup() {
         loading ? <Loader /> :
             <>
                 < div className='loginSignupContainer' >
+                <MetaData title={`myStore - Login`} />
                     <div className="loginSignupBox">
                         <div>
                             <div className="loginSignupToggle">
