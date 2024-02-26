@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductDetails.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader.jsx';
@@ -14,6 +14,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
 import Review from './ReviewCard.jsx';
 import MetaData from '../layout/MetaData.jsx';
+import { addItemsToCart } from '../../actions/cartAction.jsx';
 
 
 function ProductDetails() {
@@ -29,10 +30,27 @@ function ProductDetails() {
         isHalf: true,
         size: 25
     }
+    const [quantity, setQuantity] = useState(1);
+
+    const increaseQuantity = () => {
+        if (quantity >= product.stock)
+            return;
+        setQuantity(quantity + 1);
+    }
+
+    const decreaseQuantity = () => {
+        if (quantity <= 1)
+            return;
+        setQuantity(quantity - 1);
+    }
+
+    const addToCartHandle = ()=>{
+        dispatch(addItemsToCart(product, quantity));
+        alert.success("Item added to cart")
+    }
 
     useEffect(() => {
-        if (error)
-        {
+        if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
@@ -41,7 +59,7 @@ function ProductDetails() {
 
     return (
         loading ? <Loader /> : <>
-        <MetaData title={`${product.name} - myStore`} />
+            <MetaData title={`${product.name} - myStore`} />
             <div className='productContainer'>
 
                 <div>
@@ -72,15 +90,15 @@ function ProductDetails() {
                         <h4>Rs. {product.price}</h4>
                         <div className="productBlock-3-1">
                             <div className="productBlock-3-1-1">
-                                <IconButton color="error" aria-label="add to shopping cart">
+                                <IconButton color="error" aria-label="decrease qty" onClick={decreaseQuantity}>
                                     <RemoveIcon />
                                 </IconButton>
-                                <input type="number" value={1} />
-                                <IconButton color="success" aria-label="add to shopping cart">
+                                <span>{quantity}</span>
+                                <IconButton color="success" aria-label="increase qty" onClick={increaseQuantity}>
                                     <AddIcon />
                                 </IconButton>
                             </div>
-                            <Button variant="outlined" color="primary">Add to Cart</Button>
+                            <Button variant="outlined" color="primary" onClick={addToCartHandle}>Add to Cart</Button>
                         </div>
                         <p>
                             <b className={`text-${product.stock < 1 ? "danger" : "success"}`}>
