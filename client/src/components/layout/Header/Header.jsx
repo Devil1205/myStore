@@ -38,12 +38,14 @@ function Header() {
             link1Margin="10px"
             link1Paddin="5px"
             searchIcon
+            searchIconUrl="/search"
             searchIconColor="#0d6efd"
             searchIconColorHover="rgb(4 69 164)"
             searchIconSize="large"
             searchIconMargin="10px"
             SearchIconElement={SearchIcon}
             cartIcon
+            cartIconUrl="/cart"
             cartIconColor="#0d6efd"
             cartIconColorHover="rgb(4 69 164)"
             cartIconSize="large"
