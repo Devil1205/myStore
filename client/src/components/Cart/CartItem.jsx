@@ -4,29 +4,49 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Link } from 'react-router-dom';
-import { addItemsToCart } from '../../actions/cartAction';
+import { addItemsToCart, removeItemsFromCart } from '../../actions/cartAction';
+import { useDispatch } from 'react-redux';
+import { useAlert } from 'react-alert';
 
 function CartItem({ item }) {
 
     const [quantity, setQuantity] = useState(item.quantity);
+    const dispatch = useDispatch();
+    const alert = useAlert();
 
     const increaseQuantity = () => {
         if (quantity >= item.stock)
             return;
         setQuantity(quantity + 1);
-        addToCartHandle();
+        addToCartHandle(quantity + 1);
     }
 
     const decreaseQuantity = () => {
         if (quantity <= 1)
             return;
         setQuantity(quantity - 1);
-        addToCartHandle();
+        addToCartHandle(quantity - 1);
     }
 
-    const addToCartHandle = () => {
-        dispatch(addItemsToCart(item, quantity));
-        alert.success("Item added to cart")
+    const addToCartHandle = (qty) => {
+        const product = {
+            "_id": item.id,
+            "name": item.name,
+            "images": [{ url: item.image }],
+            "price": item.price,
+            "stock": item.stock,
+        };
+        dispatch(addItemsToCart(product, qty));
+        alert.success("Item updated in cart");
+    
+    }
+    const removeFromCartHandle = () => {
+        const product = {
+            "_id": item.id,
+        };
+        // console.log(item.id);
+        dispatch(removeItemsFromCart(product));
+        alert.success("Item removed from cart");
     }
 
     return (
@@ -41,7 +61,7 @@ function CartItem({ item }) {
                     <IconButton color="error" aria-label="decrease qty" onClick={decreaseQuantity}>
                         <RemoveIcon />
                     </IconButton>
-                    <span>{item.quantity}</span>
+                    <span>{quantity}</span>
                     <IconButton color="success" aria-label="increase qty" onClick={increaseQuantity}>
                         <AddIcon />
                     </IconButton>
@@ -54,8 +74,8 @@ function CartItem({ item }) {
                     <h5>{item.name}</h5>
                     <div>₹{item.price}</div>
                 </Link>
-                <button className="myStoreBtn cartBtn">Remove</button>
-                <div>Subtotal : ₹{item.price * item.quantity}</div>
+                <button className="myStoreBtn2 cartBtn" onClick={()=>{removeFromCartHandle()}}>Remove</button>
+                <div>Subtotal : ₹{item.price * quantity}</div>
             </div>
         </div >
     )

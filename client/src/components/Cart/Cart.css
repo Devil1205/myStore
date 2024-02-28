@@ -14,11 +14,13 @@
     border-radius: 5px;
 }
 
-.cartItems{
+.cartItems {
     width: 70%;
     min-width: 300px;
-    max-width: 500px;
+    max-width: 600px;
     min-height: 300px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .cartHeading {
@@ -29,33 +31,104 @@
     width: 300px;
     max-width: 100%;
     min-width: 270px;
-    height: 250px;
+    /* height: 250px; */
 }
 
-.cartItems>div, .cartTotal>div{
+.cartItems>div,
+.cartTotal>div {
     padding: 10px;
     border-bottom: 1px solid #e8e8e8;
     display: flex;
+}
+
+.cartTotal>div{
     justify-content: space-between;
 }
 
-.cartTotal>:last-child{
+.cartTotal>div:nth-child(4) {
     font-weight: 500;
 }
 
+.cartEmptyContainer {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font: 500 calc(25px + 0.3vw) 'Roboto';
+}
+
+.cartEmptyContainer>img {
+    animation: cartAnimation 5s ease-in-out infinite forwards;
+    margin: 40px 0px;
+}
+
 @media screen and (max-width: 775px) {
-    .cartContainer{
+    .cartContainer {
         flex-direction: column;
         align-items: center;
     }
 
-    .cartItems{
+    .cartItems {
         width: 90%;
+        padding-bottom: 20px !important;
+        max-height: fit-content;
     }
 
-    .cartItems>div{
-        flex-wrap: wrap;
-        justify-content: center;
+    .cartItems>div {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
     }
     
+}
+
+@media screen and (max-width: 450px) {
+
+    .cartItems>div{
+        flex-direction: column;
+        /* align-items: center; */
+    }
+}
+
+@keyframes cartAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    
+    20% {
+        transform: rotate(360deg);
+    }
+    
+    50%{
+        transform: rotate(360deg);
+    }
+
+    70% {
+        transform: rotate(0deg);
+    }
+    
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* width */
+.cartItems::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.cartItems::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.cartItems::-webkit-scrollbar-thumb {
+    background: tomato;
+}
+
+/* Handle on hover */
+.cartItems::-webkit-scrollbar-thumb:hover {
+    background: rgb(216, 75, 51);
 }
