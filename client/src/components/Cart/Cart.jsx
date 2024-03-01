@@ -22,7 +22,7 @@ function Cart() {
     }
 
     const calcTotalPrice = cartItems.reduce((acc, product) => acc + product.price * product.quantity, 0);
-    
+
     return (
         cartItems.length === 0 ?
             <>
@@ -60,7 +60,7 @@ function Cart() {
                         <div><span>Price(4 items) </span><span>₹{calcTotalPrice}</span></div>
                         <div><span>Delivery </span><span>₹40</span></div>
                         <div><span>Total </span><span>₹{calcTotalPrice + 40}</span></div>
-                        <button className="myStoreBtn">Proceed</button>
+                        <Link to="/shipping"><button className="myStoreBtn">Proceed</button></Link>
                     </div>
                 </div>
             </>

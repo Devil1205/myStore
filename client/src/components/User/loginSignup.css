@@ -53,6 +53,7 @@
     left: 50%;
     transform: translateX(-50%);
     transition: 0.9s cubic-bezier(1,-0.13, 0.58, 1) all;
+    max-width: 253px;
 }
 
 .loginForm{

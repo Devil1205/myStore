@@ -1,0 +1,13 @@
+.shippingInfoContainer{
+    flex-direction: column;
+}
+
+.shippingInfoBox{
+    max-height: 630px;
+    height: 90vh;
+    min-height: 630px;
+}
+
+.shippingInfoBox>form>div>.MuiFormControl-root{
+    margin: 0px;
+}

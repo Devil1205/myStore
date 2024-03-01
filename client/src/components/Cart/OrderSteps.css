@@ -1,0 +1,48 @@
+.orderSteps{
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px 0px;
+}
+
+.orderSteps .MuiStepLabel-label{
+    margin: 0!important;
+}
+
+.MuiStepLabel-root>.Mui-active {
+    color: black;
+    font-weight: bold;
+}
+
+.MuiStepLabel-labelContainer>.Mui-active>p {
+    color: black;
+    font-weight: bold;
+}
+
+.MuiStepLabel-root>.Mui-completed {
+    color: rgba(255, 99, 71, 0.627);
+}
+
+.MuiStepLabel-labelContainer>.Mui-completed>p {
+    color: rgba(255, 99, 71, 0.627);
+}
+
+.MuiStepLabel-root>.Mui-disabled {
+    color: rgb(158, 158, 158);
+}
+
+.MuiStepLabel-labelContainer>.Mui-disabled>p {
+    /* color: tomato;
+    font-weight: bold; */
+}
+
+.MuiStepConnector-root .MuiStepConnector-line{
+    border-width: 3px!important;
+    border-radius: 50px;
+}
+
+.MuiStepConnector-root.Mui-completed .MuiStepConnector-line, .MuiStepConnector-root.Mui-active .MuiStepConnector-line{
+    border-color: rgba(255, 99, 71, 0.627);
+}
