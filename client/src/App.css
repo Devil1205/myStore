@@ -74,3 +74,17 @@ body{
 .myStoreBtn2:hover{
     background-color: rgb(100, 100, 100);
 }
+
+.myStoreEditBtn{
+    width: 100%;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: rgb(44, 146, 236);
+    border: none;
+    font: 500 16px 'Roboto';
+}
+
+.myStoreEditBtn:hover{
+    background-color: rgb(238, 247, 255);
+}

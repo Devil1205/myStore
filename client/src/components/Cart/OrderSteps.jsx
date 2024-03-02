@@ -1,7 +1,6 @@
 import React from 'react';
 import './OrderSteps.css';
 import LocalShippingRoundedIcon from '@mui/icons-material/LocalShippingRounded';
-import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import { Typography } from '@mui/material';
@@ -33,7 +32,7 @@ function OrderSteps({ activePage }) {
                     {
                         steps.map((elem, ind) => {
                             return (<Step key={ind} active={ind===activePage} completed={ind<activePage}>
-                                <StepLabel StepIconComponent={elem.icon}>{elem.label}</StepLabel>
+                                <StepLabel StepIconComponent={elem.icon}>{elem.label}</StepLabel> 
                             </Step>)
                         })
                     }

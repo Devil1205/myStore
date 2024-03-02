@@ -14,7 +14,6 @@ import TextField from '@mui/material/TextField';
 import { Country, State } from 'country-state-city';
 import { saveShippingInfo } from '../../actions/cartAction';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
-import { Link } from 'react-router-dom';
 import OrderSteps from './OrderSteps';
 
 function ShippingInfo() {
@@ -67,7 +66,8 @@ function ShippingInfo() {
             alert.error("State is required");
             return false;
         }
-        dispatch(saveShippingInfo(data));
+        dispatch(saveShippingInfo(data));    
+        navigate("/checkout");
     }
 
     return (
@@ -136,7 +136,7 @@ function ShippingInfo() {
                         </FormControl>
                     </div>
 
-                    <Link to="/checkout" ><button className="signupSubmit" type='submit' >Checkout</button></Link>
+                    <button className="signupSubmit" type='submit' >Checkout</button>
                 </form>
             </div>
         </div >
