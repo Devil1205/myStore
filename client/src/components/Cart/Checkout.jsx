@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Checkout.css';
 import LocalShippingRoundedIcon from '@mui/icons-material/LocalShippingRounded';
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
@@ -8,6 +8,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { Country, State } from 'country-state-city';
+import { formatNumber } from '../../App';
 
 function Checkout() {
 
@@ -15,6 +16,10 @@ function Checkout() {
     const alert = useAlert();
     const navigate = useNavigate();
     const { shippingInfo, cartItems } = useSelector(state => state.cart);
+    const [subTotal, setSubTotal] = useState("");
+    const [delivery, setDelivery] = useState("");
+    const [tax, setTax] = useState("");
+    const [totalPrice, setTotalPrice] = useState("");
     // const cartItems = [
     //     {
     //         id: "65b00183b987d41afcd385f0",
@@ -43,13 +48,6 @@ function Checkout() {
     // ]
     const calcTotalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-    const formatNumber = (num) => {
-        return new Intl.NumberFormat('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }).format(num);
-    }
-
     const calcGst = (num) => {
         return num * 0.18;
     }
@@ -57,6 +55,27 @@ function Checkout() {
     const calcDelivery = (num) => {
         return num > 2000 ? 0 : 40;
     }
+
+    const checkoutSubmitHandle = () => {
+        const orderData = {
+            subTotal,
+            delivery,
+            tax,
+            totalPrice
+        }
+        sessionStorage.setItem("orderInfo", JSON.stringify(orderData));
+        navigate("/payment");
+    }
+
+    useEffect(() => {
+        if (cartItems.length === 0)
+            navigate("/cart");
+        setSubTotal((Number(calcTotalPrice)).toFixed(2));
+        setDelivery(calcTotalPrice > 2000 ? 0 : 40);
+        setTax((Number(calcGst(calcTotalPrice + calcDelivery(calcTotalPrice)))).toFixed(2));
+        setTotalPrice(Number((calcTotalPrice + calcGst(calcTotalPrice + calcDelivery(calcTotalPrice)) + calcDelivery(calcTotalPrice))).toFixed(2));
+    }, [])
+
 
     return (
         <div className='checkout'>
@@ -108,11 +127,11 @@ function Checkout() {
                         <div>Payment</div>
                     </div>
                     <div className='checkoutTotal'>
-                        <div><span>Price </span><span>₹{formatNumber(calcTotalPrice)}</span></div>
-                        <div><span>Delivery </span><span>{calcTotalPrice > 2000 ? "Free" : "₹" + formatNumber(40)}</span></div>
-                        <div><span>GST@18% </span><span>₹{formatNumber(calcGst(calcTotalPrice + calcDelivery(calcTotalPrice)))}</span></div>
-                        <div><span>Total </span><span>₹{formatNumber(calcTotalPrice + calcGst(calcTotalPrice + calcDelivery(calcTotalPrice)) + calcDelivery(calcTotalPrice))}</span></div>
-                        <Link to="/shipping"><button className="myStoreBtn">Proceed to pay</button></Link>
+                        <div><span>Price </span><span>₹{formatNumber(subTotal)}</span></div>
+                        <div><span>Delivery </span><span>{delivery === 0 ? "Free" : "₹" + formatNumber(delivery)}</span></div>
+                        <div><span>GST@18% </span><span>₹{formatNumber(tax)}</span></div>
+                        <div><span>Total </span><span>₹{formatNumber(totalPrice)}</span></div>
+                        <button className="myStoreBtn" onClick={checkoutSubmitHandle}>Proceed to pay</button>
                     </div>
                 </div>
 

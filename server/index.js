@@ -39,6 +39,7 @@ cloudinary.config({
 app.use("/api/v1/", require('./routes/product'));
 app.use("/api/v1/", require('./routes/user'));
 app.use("/api/v1/", require('./routes/order'));
+app.use("/api/v1/", require('./routes/payment'));
 
 app.use(errorHandler);
 

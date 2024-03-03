@@ -1,0 +1,11 @@
+.paymentBox{
+    min-height: 400px;
+    max-height: 400px;
+    height: 90vh;
+}
+
+.paymentInput{
+    padding: 10px 10px 10px 40px;
+    width: 230px;
+    outline: 1px solid gray;
+}
