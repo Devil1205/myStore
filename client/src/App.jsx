@@ -25,6 +25,7 @@ import axios from 'axios';
 import Payment from './components/Cart/Payment';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import OrderSuccess from './components/Cart/OrderSuccess';
 
 export const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
@@ -76,6 +77,7 @@ function App() {
               <Route exact path="/shipping" element={<ShippingInfo />} />
               <Route exact path="/checkout" element={<Checkout />} />
               <Route exact path="/payment" element={<Payment />} />
+              <Route exact path="/payment/success" element={<OrderSuccess />} />
             </Route>
 
             <Route exact path={"/password/forgot"} element={<ForgotPassword />} />

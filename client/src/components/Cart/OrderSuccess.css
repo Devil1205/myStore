@@ -1,0 +1,38 @@
+.orderSuccess {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.orderSuccessContainer {
+    text-align: center;
+    font: 500 calc(20px + 0.3vw) 'Roboto';
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 350px;
+    max-width: 400px;
+    min-height: 323px;
+}
+
+.orderSuccessContainer>img {
+    width: 100px;
+    height: 100px;
+}   
+
+.orderSuccessContainer>div>button {
+    max-width: 250px;
+    margin: 15px;
+}
+
+.orderSuccessContainer>div>p{
+    font: 400 20px 'Roboto';
+    color: gray;
+    text-align: justify;
+    margin: 10px 0px;
+}

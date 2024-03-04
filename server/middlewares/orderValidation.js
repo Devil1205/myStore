@@ -55,7 +55,7 @@ const createOrderValidation = {
 
             body('shippingPrice')
                 .notEmpty().withMessage("Shipping price cannot be empty")
-                .isFloat({ min: 1 }).withMessage("Shipping price must be an integer greater than 0"),
+                .isFloat({ min: 0 }).withMessage("Shipping price must be positive"),
 
             body('totalPrice')
                 .notEmpty().withMessage("Shipping price cannot be empty")
@@ -65,7 +65,7 @@ const createOrderValidation = {
         (req, res, next) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({ success: false, message: errors });
+                return res.status(400).json({ success: false, message: errors.errors[0].msg });
             }
             next();
         }

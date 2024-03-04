@@ -9,3 +9,7 @@
     width: 230px;
     outline: 1px solid gray;
 }
+
+.paymentBtn:disabled{
+    background-color: rgb(255 139 118);
+}
