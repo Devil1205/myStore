@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
+import MetaData from '../layout/MetaData';
 
 function Search() {
 
@@ -16,6 +17,7 @@ function Search() {
 
     return (
         <div className='searchProducts'>
+            <MetaData title="myStore - Search Product" />
             <form onSubmit={handleProductSearch}>
                 <TextField id='searchProducts' label="Search Products" variant="outlined" fullWidth
                     InputProps={{

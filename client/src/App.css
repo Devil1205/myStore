@@ -88,3 +88,11 @@ body{
 .myStoreEditBtn:hover{
     background-color: rgb(238, 247, 255);
 }
+
+.successColor{
+    color: #0e9b00!important;
+}
+
+.failColor{
+    color: #e80000!important;
+}

@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer/Footer';
 import Home from './components/Home/Home';
@@ -26,21 +26,29 @@ import Payment from './components/Cart/Payment';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './components/Cart/OrderSuccess';
+import MyOrders from './components/Order/MyOrders';
+import OrderDetails from './components/Order/OrderDetails';
 
 export const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   }).format(num);
+}
+
+export const convertBackToNumber = (num) => {
+  return Number(num.slice(0, num.indexOf(".")).match(/\d/g).join(""));
 }
 
 function App() {
   const backend = "http://localhost:5000";
 
   const [stripeApiKey, setStripeApiKey] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchStripeApiKey = async () => {
     try {
+      setLoading(false);
       const { data } = await axios.get(`${backend}/api/v1/payment/getApiKey`, { withCredentials: true });
       setStripeApiKey(data.key);
     } catch (error) {
@@ -51,39 +59,42 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser());
     fetchStripeApiKey();
-  }, [])
+  }, [store.dispatch])
 
 
   return (
     <>
       <Router>
         <Header />
-        {stripeApiKey && <Elements stripe={loadStripe(stripeApiKey)}>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/home" element={<Home />} />
-            <Route exact path="/product/:id" element={<ProductDetails />} />
-            <Route exact path="/products" element={<Products />} />
-            <Route exact path="/search" element={<Search />} />
-            <Route exact path="/login" element={<LoginSignup />} />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/product/:id" element={<ProductDetails />} />
+          <Route exact path="/products" element={<Products />} />
+          <Route exact path="/search" element={<Search />} />
+          <Route exact path="/login" element={<LoginSignup />} />
+          <Route exact path={"/password/forgot"} element={<ForgotPassword />} />
+          <Route exact path={"/password/reset/:token"} element={<ResetPassword />} />
 
-            {/* protected routes -- login required*/}
-            <Route element={<ProtectedRoute />} >
-              <Route exact path="/user" element={<UserOptions />} />
-              <Route exact path={"/user/profile"} element={<Profile />} />
-              <Route exact path={"/user/profile/update"} element={<UpdateProfile />} />
-              <Route exact path={"/user/password/update"} element={<UpdatePassword />} />
-              <Route exact path="/cart" element={<Cart />} />
-              <Route exact path="/shipping" element={<ShippingInfo />} />
-              <Route exact path="/checkout" element={<Checkout />} />
-              <Route exact path="/payment" element={<Payment />} />
-              <Route exact path="/payment/success" element={<OrderSuccess />} />
-            </Route>
+          {/* protected routes -- login required*/}
+          <Route element={<ProtectedRoute />} >
+            <Route exact path="/user" element={<UserOptions />} />
+            <Route exact path={"/user/profile"} element={<Profile />} />
+            <Route exact path={"/user/profile/update"} element={<UpdateProfile />} />
+            <Route exact path={"/user/password/update"} element={<UpdatePassword />} />
+            <Route exact path="/cart" element={<Cart />} />
+            <Route exact path="/shipping" element={<ShippingInfo />} />
+            <Route exact path="/checkout" element={<Checkout />} />
+            <Route exact path="/payment/success" element={<OrderSuccess />} />
+            <Route exact path="/orders" element={<MyOrders />} />
+            <Route exact path="/order/:id" element={<OrderDetails />} />
 
-            <Route exact path={"/password/forgot"} element={<ForgotPassword />} />
-            <Route exact path={"/password/reset/:token"} element={<ResetPassword />} />
-          </Routes>
-        </Elements>}
+            {/* payment route */}
+            <Route exact path="/payment" element={!loading && stripeApiKey ? <Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements> : <Navigate to="/cart" />} />
+
+          </Route>
+
+        </Routes>
         <Footer />
       </Router >
     </>

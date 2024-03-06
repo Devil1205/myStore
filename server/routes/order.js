@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { isAuthenticatedUser, isAuthenticatedRole } = require('../middlewares/auth');
-const { createOrder, getSingleOrder, getLoggedInOrders, getAllOrders, updateOrder, deleteOrder } = require('../controllers/orderController');
+const { createOrder, getSingleOrder, getLoggedInOrders, getAllOrders, updateOrder, deleteOrder, getOrderDetails } = require('../controllers/orderController');
 const { createOrderValidation } = require('../middlewares/orderValidation');
 
 //create new order
@@ -12,6 +12,9 @@ router.get("/admin/order/:id", isAuthenticatedUser, isAuthenticatedRole("admin")
 
 //get logged-in user orders
 router.get("/profile/orders", isAuthenticatedUser, getLoggedInOrders);
+
+//get logged-in user order details
+router.get("/order/:id", isAuthenticatedUser, getOrderDetails);
 
 //get all users orders -- admin
 router.get("/admin/orders", isAuthenticatedUser, isAuthenticatedRole("admin"), getAllOrders);

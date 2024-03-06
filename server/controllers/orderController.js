@@ -43,7 +43,20 @@ const getSingleOrder = async (req, res, next) => {
 //get logged in user orders
 const getLoggedInOrders = async (req, res, next) => {
     try {
-        const order = await Order.find({ user: req.user.id });
+        const orders = await Order.find({ user: req.user.id });
+        return res.status(200).json({ success: true, orders });
+    }
+    catch (e) {
+        return next({ status: 500, message: "Internal Server Error" });
+    }
+}
+
+//get logged in user order details
+const getOrderDetails = async (req, res, next) => {
+    try {
+        const order = await Order.findOne({ "_id": req.params.id, user: req.user.id }).populate("user", "name email");
+        if (!order)
+            return next({ status: 404, message: "This order does not exist" });
         return res.status(200).json({ success: true, order });
     }
     catch (e) {
@@ -119,4 +132,4 @@ const deleteOrder = async (req, res, next) => {
 }
 
 
-module.exports = { createOrder, getSingleOrder, getLoggedInOrders, getAllOrders, updateOrder, deleteOrder };
+module.exports = { createOrder, getSingleOrder, getLoggedInOrders, getOrderDetails, getAllOrders, updateOrder, deleteOrder };

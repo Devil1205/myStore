@@ -67,7 +67,7 @@ function Products() {
         <>
             {loading ? <Loader /> :
                 <div className='h-100vh'>
-                    <MetaData title={"Products - myStore"} />
+                    <MetaData title={"myStore - Products"} />
                     <div>
                         <div className="d-flex align-items-center">
                             <h2 className="homeHeading mb-2">

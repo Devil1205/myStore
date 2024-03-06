@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { Country, State } from 'country-state-city';
 import { formatNumber } from '../../App';
+import MetaData from '../layout/MetaData';
 
 function Checkout() {
 
@@ -20,32 +21,7 @@ function Checkout() {
     const [delivery, setDelivery] = useState("");
     const [tax, setTax] = useState("");
     const [totalPrice, setTotalPrice] = useState("");
-    // const cartItems = [
-    //     {
-    //         id: "65b00183b987d41afcd385f0",
-    //         name: "Vivo X100",
-    //         image: "https://images.indianexpress.com/2023/11/Vivo-X100-2.jpg",
-    //         price: 63000,
-    //         stock: 2,
-    //         quantity: 2,
-    //     },
-    //     {
-    //         id: "65b00183b987d41afcd385f0",
-    //         name: "Vivo X100",
-    //         image: "https://images.indianexpress.com/2023/11/Vivo-X100-2.jpg",
-    //         price: 63000,
-    //         stock: 2,
-    //         quantity: 2,
-    //     },
-    //     {
-    //         id: "65b00183b987d41afcd385f0",
-    //         name: "Vivo X100",
-    //         image: "https://images.indianexpress.com/2023/11/Vivo-X100-2.jpg",
-    //         price: 63000,
-    //         stock: 2,
-    //         quantity: 2,
-    //     },
-    // ]
+
     const calcTotalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     const calcGst = (num) => {
@@ -79,6 +55,7 @@ function Checkout() {
 
     return (
         <div className='checkout'>
+            <MetaData title="myStore - Checkout" />
             <OrderSteps activePage={1} />
             <div className='checkoutContainer'>
 
@@ -110,7 +87,7 @@ function Checkout() {
                                             <div>Qty x{elem.quantity}</div>
                                         </div>
                                         <div>
-                                            <div>{elem.name}124 adsfdasdfdsfdsf 234324 dsgfdsf</div>
+                                            <div>{elem.name}</div>
                                             <div>₹{elem.price}</div>
                                             <div>Subtotal : ₹{elem.quantity * elem.price}</div>
                                         </div>

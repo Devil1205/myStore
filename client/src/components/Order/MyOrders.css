@@ -1,0 +1,47 @@
+.myOrders{
+    min-height: 100vh;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.myOrders>div{
+    max-width: 1300px;
+    margin: 20px 0px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.orderHeaderFont{
+    background-color: #ff5739;
+    color: white;
+}
+
+.orderHeaderFont>div>div>div>div{
+    font: 500 18px 'Roboto';
+}
+
+.orderFont{
+    font: 500 15px "Roboto";
+    color: #6a6a6a;
+}
+
+.myOrders .MuiDataGrid-menuIcon{
+    margin: 0px!important;
+    color: white!important;
+}
+
+.myOrders .MuiDataGrid-menuIcon>button{
+    color: white;
+}
+
+.myOrders .MuiDataGrid-iconButtonContainer{
+    margin: 0px 7px!important;
+}
+
+.myOrders .MuiDataGrid-iconButtonContainer>button{
+    color: white;
+}

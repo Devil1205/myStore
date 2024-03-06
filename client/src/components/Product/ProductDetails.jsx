@@ -26,7 +26,7 @@ function ProductDetails() {
         edit: false,
         color: "rgb(20,20,20,0.1)",
         activeColor: "tomato",
-        value: product.ratings,
+        value: product && product.ratings,
         isHalf: true,
         size: 25
     }
@@ -44,7 +44,7 @@ function ProductDetails() {
         setQuantity(quantity - 1);
     }
 
-    const addToCartHandle = ()=>{
+    const addToCartHandle = () => {
         dispatch(addItemsToCart(product, quantity));
         alert.success("Item added to cart")
     }
@@ -59,7 +59,7 @@ function ProductDetails() {
 
     return (
         loading ? <Loader /> : <>
-            <MetaData title={`${product.name} - myStore`} />
+            <MetaData title={`myStore - ${product.name}`} />
             <div className='productContainer'>
 
                 <div>

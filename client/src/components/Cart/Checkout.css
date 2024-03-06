@@ -29,6 +29,7 @@
     justify-content: center;
     max-width: 500px;
     flex-direction: column;
+    width: 90vw;
 }
 
 .checkoutContainer>div:nth-child(2){
@@ -47,6 +48,10 @@
     align-self: center;
     width: 100%;
     justify-content: center;
+}
+
+.checkoutBlock-3 .checkoutItemHeading{
+    margin-bottom: 5px;
 }
 
 .checkoutItemHeading>div{
@@ -160,7 +165,6 @@
     }
 
     .checkoutContainer>div:nth-child(2){
-        width: 100%;
         align-items: center;
     }
 }

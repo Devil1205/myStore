@@ -21,7 +21,7 @@ function ShippingInfo() {
     const dispatch = useDispatch();
     const alert = useAlert();
     const navigate = useNavigate();
-    const { shippingInfo } = useSelector(state => state.cart);
+    const { shippingInfo, cartItems } = useSelector(state => state.cart);
 
     const [address, setAddress] = useState(shippingInfo.address ? shippingInfo.address : "");
     const [city, setCity] = useState(shippingInfo.city ? shippingInfo.city : "");
@@ -29,7 +29,6 @@ function ShippingInfo() {
     const [pincode, setPincode] = useState(shippingInfo.pincode ? shippingInfo.pincode : "");
     const [country, setCountry] = useState(shippingInfo.country ? shippingInfo.country : "");
     const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo ? shippingInfo.phoneNo : "");
-    console.log();
 
     const submitSignupForm = (e) => {
         e.preventDefault();
@@ -66,9 +65,15 @@ function ShippingInfo() {
             alert.error("State is required");
             return false;
         }
-        dispatch(saveShippingInfo(data));    
+        dispatch(saveShippingInfo(data));
         navigate("/checkout");
     }
+
+    useEffect(() => {
+        if (cartItems.length === 0)
+            navigate("/cart");
+    }, [])
+
 
     return (
         < div className='loginSignupContainer shippingInfoContainer' >

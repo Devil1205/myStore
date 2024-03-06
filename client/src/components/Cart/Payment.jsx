@@ -29,7 +29,7 @@ function Payment() {
     const navigate = useNavigate();
     const { user } = useSelector(state => state.user);
     const { shippingInfo, cartItems } = useSelector(state => state.cart);
-    const { error } = useSelector(state => state.order);
+    const { error } = useSelector(state => state.newOrder);
     const paymentBtn = useRef(null);
     const alert = useAlert();
     const stripe = useStripe();
