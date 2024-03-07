@@ -59,7 +59,7 @@
     margin: 5px 0px;
 }
 
-.productBlock-3-1-1 > span{
+.productBlock-3-1-1>span {
     background-color: white;
     width: 180px;
     display: inline-block;
@@ -88,6 +88,11 @@
     margin: auto;
     padding: 10px 15px;
     border-bottom: 1px solid #dcdcdc;
+}
+
+.reviewBtn {
+    margin-top: 10px !important;
+    margin-left: 7px !important;
 }
 
 .productReviews>div {
@@ -121,6 +126,24 @@
     color: #7e7a7a;
     font: 500 20px 'Roboto';
     margin: 15px auto;
+}
+
+.newReviewHeading {
+    width: fit-content;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 5px 10px;
+    margin: auto;
+}
+
+.newReviewContent {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    max-width: 100%;
+}
+
+.newReviewContent>div {
+    margin-top: 20px;
 }
 
 

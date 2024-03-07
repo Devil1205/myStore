@@ -101,13 +101,12 @@
 .productCard > div{
     color: tomato;
     font: 500 18px 'Roboto', sans-serif;
-    margin: 2px 0px;
+    margin: 5px 0px;
 }
 
-.productCard > div > span{
-    color: blue;
+/* .productCard > div > span{
     font-size: 15px;
-}
+} */
 
 .nav1, .nav2, .nav3, .nav4{
     backdrop-filter: blur(4px);

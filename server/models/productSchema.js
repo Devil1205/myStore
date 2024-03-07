@@ -55,7 +55,6 @@ const Product = mongoose.Schema({
         },
         comment:{
             type: String,
-            required: true
         }
     }],
     user:{

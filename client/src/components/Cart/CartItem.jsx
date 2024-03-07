@@ -58,11 +58,11 @@ function CartItem({ item }) {
                 </Link>
 
                 <div className="cartItemBlock-1-1">
-                    <IconButton color="error" aria-label="decrease qty" onClick={decreaseQuantity}>
+                    <IconButton color="error" aria-label="decrease qty" disabled={quantity <= 1} onClick={decreaseQuantity}>
                         <RemoveIcon />
                     </IconButton>
                     <span>{quantity}</span>
-                    <IconButton color="success" aria-label="increase qty" onClick={increaseQuantity}>
+                    <IconButton color="success" aria-label="increase qty" disabled={quantity >= item.stock} onClick={increaseQuantity}>
                         <AddIcon />
                     </IconButton>
                 </div>
