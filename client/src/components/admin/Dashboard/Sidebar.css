@@ -1,0 +1,33 @@
+.sidebar {
+    background-color: white;
+    min-width: 200px;
+    padding: 25px;
+    padding-top: 7vmax;
+    overflow-y: auto;
+}
+
+.sidebar a{
+    color: tomato;
+}
+
+.sidebar .MuiTreeItem-iconContainer{
+    color: tomato;
+}
+
+.sidebar .MuiTreeItem-label{
+    font-size: 18px!important;
+    padding: 10px 0px;
+    color: black;
+}
+
+.sidebar .Mui-selected{
+    background-color: inherit!important;
+}
+
+.sidebar .MuiTreeItem-content{
+    transition: 0.3s all ease-in-out;
+}
+
+.sidebar .MuiTreeItem-content:hover{
+    background-color: rgb(255, 241, 239)!important;
+}

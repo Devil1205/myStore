@@ -30,7 +30,7 @@ function UserOptions() {
                         {user.role === "admin" && <span className='text-danger'>admin</span>}
                         <div>
                             {user.role === "admin" &&
-                                <Link to="/dashboard">
+                                <Link to="/admin/dashboard">
                                     Dashboard <IoIosArrowForward />
                                 </Link>
                             }

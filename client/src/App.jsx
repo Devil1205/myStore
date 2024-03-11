@@ -28,6 +28,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './components/Cart/OrderSuccess';
 import MyOrders from './components/Order/MyOrders';
 import OrderDetails from './components/Order/OrderDetails';
+import Dashboard from './components/admin/Dashboard/Dashboard';
+import AdminRoute from './components/route/AdminRoute';
 
 export const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
@@ -88,6 +90,11 @@ function App() {
             <Route exact path="/payment/success" element={<OrderSuccess />} />
             <Route exact path="/orders" element={<MyOrders />} />
             <Route exact path="/order/:id" element={<OrderDetails />} />
+
+            {/* admin routes -- admin permission required */}
+            <Route element={<AdminRoute />}>
+              <Route exact path="/admin/dashboard" element={<Dashboard />} />
+            </Route>
 
             {/* payment route */}
             <Route exact path="/payment" element={!loading && stripeApiKey ? <Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements> : <Navigate to="/cart" />} />
