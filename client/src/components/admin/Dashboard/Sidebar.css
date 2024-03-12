@@ -4,6 +4,8 @@
     padding: 25px;
     padding-top: 7vmax;
     overflow-y: auto;
+    height: 100%;
+    position: fixed;
 }
 
 .sidebar a{
@@ -30,4 +32,13 @@
 
 .sidebar .MuiTreeItem-content:hover{
     background-color: rgb(255, 241, 239)!important;
+}
+
+@media screen and (max-width: 700px) {
+    .sidebar{
+        height: 290px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
 }
