@@ -1,0 +1,70 @@
+.newProductBox{
+    width: 85%;
+}
+
+.newProductForm{
+    background-color: white;
+    max-width: 500px;
+    border-radius: 7px;
+    width: 100%;
+    position: relative;
+    margin: 40px auto;
+    padding: 20px 40px;
+}
+
+.newProductForm>div{
+    display: flex;
+    align-items: center;
+    margin: 25px 0px;
+}
+
+.newProductForm>div>svg {
+    position: absolute;
+    margin-left: 10px;
+}
+
+.newProductForm>div>input, .newProductForm>div>textarea{
+    padding: 10px 10px 10px 40px;
+    width: 100%;
+}
+
+.newProductDescription{
+    align-items: flex-start!important;
+}
+
+.newProductDescription>svg{
+    margin-top: 8px;
+}
+
+.newProductImagePreview{
+    width: 100%;
+}
+
+.newProductImagePreview>div{
+    width: 100%;
+}
+
+.thumbs-wrapper>button{
+    filter: invert(1);
+}
+
+.signupSubmit:disabled{
+    cursor: not-allowed;
+    background-color: rgb(255 194 183);
+}
+
+@media screen and (max-width: 500px) {
+    .loginSignupContainer{
+        background: white;
+        min-height: auto;
+    }
+
+    .newProductBox{
+        height: 100%;
+    }
+    
+    .newProductForm{
+        padding: 0px;  
+        margin: 10px auto;
+    }
+}

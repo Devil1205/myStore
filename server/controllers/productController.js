@@ -1,11 +1,22 @@
 const Product = require('../models/productSchema');
 const apiFeatures = require('../utils/apiFeatures');
+const cloudinary = require('cloudinary');
 
 //create product route controller
 const createProduct = async (req, res, next) => {
     try {
         req.body.user = req.user.id;
-        const product = new Product(req.body);
+        const images = [];
+        for (let i = 0; i < req.body.images.length; i++) {
+            const myCloud = await cloudinary.v2.uploader.upload(req.body.images[i], {
+                folder: "products",
+            });
+            images.push({
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            });
+        }
+        const product = new Product({ ...req.body, images });
         await product.save();
         return res.status(200).json({
             success: true,
@@ -13,7 +24,7 @@ const createProduct = async (req, res, next) => {
         })
     }
     catch (e) {
-        // console.log(e);
+        console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
@@ -24,6 +35,17 @@ const getProducts = async (req, res, next) => {
         const { product, filteredProductCount } = await apiFeatures.search(Product, req.query);
         const totalProductCount = await Product.countDocuments();
         return res.status(200).json({ success: true, product, totalProductCount, filteredProductCount });
+    }
+    catch (e) {
+        return next({ status: 500, message: "Internal Server Error" });
+    }
+}
+
+//get products route controller -- admin
+const getProductsAdmin = async (req, res, next) => {
+    try {
+        const product = await Product.find();
+        return res.status(200).json({ success: true, product });
     }
     catch (e) {
         return next({ status: 500, message: "Internal Server Error" });
@@ -189,9 +211,9 @@ const deleteReview = async (req, res, next) => {
         return res.status(200).json({ success: true, message: "Review deleted successfully" });
     }
     catch (e) {
-        console.log(e);
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
 
-module.exports = { getProducts, getProduct, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, deleteReview };
+module.exports = { getProducts, getProductsAdmin, getProduct, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, deleteReview };

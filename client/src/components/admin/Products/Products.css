@@ -1,0 +1,26 @@
+.adminProducts{
+    padding: 20px 30px;
+}
+
+.adminProducts>h3{
+    border-bottom: 1px solid #bdbdbd;
+    margin: 10px 0px;
+    padding: 5px 10px;
+}
+
+.adminProducts .MuiDataGrid-menuIcon{
+    margin: 0px!important;
+    color: white!important;
+}
+
+.adminProducts .MuiDataGrid-menuIcon>button{
+    color: white;
+}
+
+.adminProducts .MuiDataGrid-iconButtonContainer{
+    margin: 0px 7px!important;
+}
+
+.adminProducts .MuiDataGrid-iconButtonContainer>button{
+    color: white;
+}

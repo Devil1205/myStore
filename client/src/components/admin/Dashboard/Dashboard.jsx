@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Dashboard.css';
 import Sidebar from './Sidebar';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import { Link } from 'react-router-dom';
 import { Doughnut, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductAdmin } from '../../../actions/productAction';
+import Loader from '../../layout/Loader/Loader';
+import MetaData from '../../layout/MetaData';
 
 function Dashboard() {
+
+    const dispatch = useDispatch();
+    const { products, loading } = useSelector(state => state.products);
+    let outOfStock = 0;
+
+    products && products.forEach((elem) => {
+        if (elem.stock === 0)
+            outOfStock++;
+    })
 
     const getMonths = (count) => {
         const months = [
@@ -26,9 +39,15 @@ function Dashboard() {
         return months.splice(0, count);
     }
 
+    const getEarningLabels = () => {
+        const temp = ["Initial Amount"];
+        temp.push("Amount Earned");
+        return temp;
+    }
+
     ChartJS.register(...registerables);
     const earningData = {
-        labels: ["Initial Amount", "Amount Earned"],
+        labels: getEarningLabels(),
         datasets: [
             {
                 backgroundColor: "tomato",
@@ -43,13 +62,13 @@ function Dashboard() {
         labels: ["Total Products", "In Stock", "Out of Stock"],
         datasets: [
             {
-                label: "Total Products",
-                data: [10000, 0, 0],
+                label: "Products",
+                data: [products.length, 0, 0],
                 backgroundColor: ["#74bfff", "#60ce66", "#ff6868"]
             },
             {
-                label: "",
-                data: [0, 9000, 1000],
+                label: "Products",
+                data: [0, products.length - outOfStock, outOfStock],
                 backgroundColor: ["#74bfff", "#60ce66", "#ff6868"]
             },
         ]
@@ -96,48 +115,55 @@ function Dashboard() {
         },
     }
 
+    useEffect(() => {
+        dispatch(getProductAdmin());
+    }, [dispatch])
+
 
     return (
-        <div className='dashboard'>
-            <Sidebar />
+        loading ?
+            <Loader /> :
+            <div className='dashboard'>
+            <MetaData title={`myStore Admin - Dashboard`}/>
+                <Sidebar />
 
-            <div className="dashboardContainer">
-                <h1>Dashboard</h1>
-                <div className="tiles">
-                    <Link to="/admin/users">
-                        <PeopleAltRoundedIcon />
-                        <p>Total Users</p>
-                        <div>50</div>
-                    </Link>
-                    <Link to="/admin/products">
-                        <PeopleAltRoundedIcon />
-                        <p>Total Products</p>
-                        <div>50</div>
-                    </Link>
-                    <Link to="/admin/orders">
-                        <PeopleAltRoundedIcon />
-                        <p>Total Orders</p>
-                        <div>50</div>
-                    </Link>
-                </div>
-                <div className="linechart">
-                    <h2>Earnings</h2>
-                    <Line datasetIdKey="lineChart" data={earningData} options={options} />
-                </div>
+                <div className="dashboardContainer">
+                    <h1>Dashboard</h1>
+                    <div className="tiles">
+                        <Link to="/admin/users">
+                            <PeopleAltRoundedIcon />
+                            <p>Total Users</p>
+                            <div>50</div>
+                        </Link>
+                        <Link to="/admin/products">
+                            <PeopleAltRoundedIcon />
+                            <p>Total Products</p>
+                            <div>{products.length}</div>
+                        </Link>
+                        <Link to="/admin/orders">
+                            <PeopleAltRoundedIcon />
+                            <p>Total Orders</p>
+                            <div>50</div>
+                        </Link>
+                    </div>
+                    <div className="linechart">
+                        <h2>Earnings</h2>
+                        <Line datasetIdKey="lineChart" data={earningData} options={options} />
+                    </div>
 
-                <div className="doughnutchart">
-                    <h2>Products</h2>
-                    <Doughnut datasetIdKey="doughnutChart" data={productData} options={options} />
-                </div>
+                    <div className="doughnutchart">
+                        <h2>Products</h2>
+                        <Doughnut datasetIdKey="doughnutChart" data={productData} options={options} />
+                    </div>
 
-                <div className="linechart">
-                    <h2>Users</h2>
-                    <Line datasetIdKey='lineChart2' data={usersData} options={{ ...options, scales: { y: { min: 0, } } }} />
+                    <div className="linechart">
+                        <h2>Users</h2>
+                        <Line datasetIdKey='lineChart2' data={usersData} options={{ ...options, scales: { y: { min: 0, } } }} />
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
     )
 }
 

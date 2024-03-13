@@ -8,34 +8,34 @@
     position: fixed;
 }
 
-.sidebar a{
+.sidebar a {
     color: tomato;
 }
 
-.sidebar .MuiTreeItem-iconContainer{
+.sidebar .MuiTreeItem-iconContainer {
     color: tomato;
 }
 
-.sidebar .MuiTreeItem-label{
-    font-size: 18px!important;
+.sidebar .MuiTreeItem-label {
+    font-size: 18px !important;
     padding: 10px 0px;
     color: black;
 }
 
-.sidebar .Mui-selected{
-    background-color: inherit!important;
+.sidebar .Mui-selected {
+    background-color: inherit !important;
 }
 
-.sidebar .MuiTreeItem-content{
+.sidebar .MuiTreeItem-content {
     transition: 0.3s all ease-in-out;
 }
 
-.sidebar .MuiTreeItem-content:hover{
-    background-color: rgb(255, 241, 239)!important;
+.sidebar .MuiTreeItem-content:hover {
+    background-color: rgb(255, 241, 239) !important;
 }
 
 @media screen and (max-width: 700px) {
-    .sidebar{
+    .sidebar {
         height: 290px;
         width: 100%;
         overflow: hidden;
