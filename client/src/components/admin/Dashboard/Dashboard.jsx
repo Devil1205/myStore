@@ -124,7 +124,7 @@ function Dashboard() {
         loading ?
             <Loader /> :
             <div className='dashboard'>
-            <MetaData title={`myStore Admin - Dashboard`}/>
+                <MetaData title={`myStore Admin - Dashboard`} />
                 <Sidebar />
 
                 <div className="dashboardContainer">

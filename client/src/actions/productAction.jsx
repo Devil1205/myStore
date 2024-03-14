@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
     ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, CLEAR_ERRORS,
-    PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, CREATE_REVIEW_REQUEST, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAIL,
+    PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, CREATE_REVIEW_REQUEST, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL,
 } from '../constants/productContants';
 const backend = "http://localhost:5000";
 
@@ -29,7 +29,7 @@ export const getProductAdmin = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_PRODUCT_REQUEST });
 
-        const { data } = await axios.get(`${backend}/api/v1/admin/products`,{ withCredentials: true });
+        const { data } = await axios.get(`${backend}/api/v1/admin/products`, { withCredentials: true });
         dispatch({
             type: ADMIN_PRODUCT_SUCCESS,
             payload: data
@@ -39,7 +39,7 @@ export const getProductAdmin = () => async (dispatch) => {
             type: ADMIN_PRODUCT_FAIL,
             payload: error.response.data.message
         });
-        console.log(error); 
+        console.log(error);
     }
 
 }
@@ -59,6 +59,16 @@ export const createProduct = (productData) => async (dispatch) => {
         dispatch({ type: CREATE_PRODUCT_SUCCESS, payload: data.success })
     } catch (error) {
         dispatch({ type: CREATE_PRODUCT_FAIL, payload: error.response.data.message })
+    }
+}
+
+export const deleteProduct = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: DELETE_PRODUCT_REQUEST });
+        const { data } = await axios.delete(`${backend}/api/v1/admin/product/${id}`, { withCredentials: true });
+        dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success })
+    } catch (error) {
+        dispatch({ type: DELETE_PRODUCT_FAIL, payload: error.response.data.message })
     }
 }
 
