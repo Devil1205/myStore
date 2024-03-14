@@ -32,6 +32,7 @@ import Dashboard from './components/admin/Dashboard/Dashboard';
 import AdminRoute from './components/route/AdminRoute';
 import AdminProducts from './components/admin/Products/Products';
 import NewProduct from './components/admin/Products/NewProduct';
+import UpdateProduct from './components/admin/Products/UpdateProduct';
 
 export const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
@@ -98,6 +99,7 @@ function App() {
               <Route exact path="/admin/dashboard" element={<Dashboard />} />
               <Route exact path="/admin/products" element={<AdminProducts />} />
               <Route exact path="/admin/product/new" element={<NewProduct />} />
+              <Route exact path="/admin/product/:id" element={<UpdateProduct />} />
             </Route>
 
             {/* payment route */}

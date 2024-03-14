@@ -4,7 +4,7 @@
 
 .newProductForm{
     background-color: white;
-    max-width: 500px;
+    max-width: 900px;
     border-radius: 7px;
     width: 100%;
     position: relative;
@@ -38,19 +38,28 @@
 
 .newProductImagePreview{
     width: 100%;
+    overflow: auto;
 }
 
-.newProductImagePreview>div{
-    width: 100%;
-}
+.newProductImagePreview>img{
+    width: 150px;
+    margin-right: 40px;
+    height: 150px;
+    object-fit: contain;
 
-.thumbs-wrapper>button{
-    filter: invert(1);
 }
 
 .signupSubmit:disabled{
     cursor: not-allowed;
     background-color: rgb(255 194 183);
+}
+
+.submitButtons{
+    flex-direction: column;
+}
+
+.submitButtons>button{
+    margin: 10px 0px;
 }
 
 @media screen and (max-width: 500px) {
@@ -67,4 +76,29 @@
         padding: 0px;  
         margin: 10px auto;
     }
+}
+
+/* width */
+.newProductImagePreview::-webkit-scrollbar, .newProductDescription>textarea::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    cursor: default;
+}
+
+/* Track */
+.newProductImagePreview::-webkit-scrollbar-track, .newProductDescription>textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    cursor: default;
+}
+
+/* Handle */
+.newProductImagePreview::-webkit-scrollbar-thumb, .newProductDescription>textarea::-webkit-scrollbar-thumb {
+    background: tomato;
+    cursor: default;
+}
+
+/* Handle on hover */
+.newProductImagePreview::-webkit-scrollbar-thumb:hover, .newProductDescription>textarea::-webkit-scrollbar-thumb:hover {
+    background: rgb(216, 75, 51);
+    cursor: default;
 }

@@ -77,6 +77,32 @@ const updateProduct = async (req, res, next) => {
         if (!product) {
             return next({ status: 400, message: "Product not found" });
         }
+
+        //if image is not changed
+        if (req.body.imgUpdated === false)
+            delete req.body.images;
+        //if image is changed
+        else {
+            //delete old images from Cloudinary
+            const images = [];
+            for (let i = 0; i < product.images.length; i++) {
+                await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+            }
+            //upload new images to Cloudinary
+            for (let i = 0; i < req.body.images.length; i++) {
+                const myCloud = await cloudinary.v2.uploader.upload(req.body.images[i], {
+                    folder: "products",
+                });
+                images.push({
+                    public_id: myCloud.public_id,
+                    url: myCloud.secure_url
+                });
+            }
+            req.body.images = images;
+        }
+        
+        delete req.body.imgUpdated;
+
         await product.updateOne(req.body);
         return res.status(200).json({
             success: true,
@@ -91,17 +117,25 @@ const updateProduct = async (req, res, next) => {
 //delete product route controller
 const deleteProduct = async (req, res, next) => {
     try {
+
         const product = await Product.findByIdAndDelete(req.params.id);
         //if no product found, return error
         if (!product) {
             return next({ status: 400, message: "Product not found" });
         }
+
+        //delete product images from Cloudinary
+        for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+        }
+
         return res.status(200).json({
             success: true,
             message: "Product deleted successfully"
         })
     }
     catch (e) {
+        console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }

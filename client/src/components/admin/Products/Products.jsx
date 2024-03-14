@@ -26,7 +26,7 @@ function Products() {
     const alert = useAlert();
     const navigate = useNavigate();
     const { products, loading } = useSelector(state => state.products);
-    const { isDeleted, loading: deleteProductLoading, error } = useSelector(state => state.deleteProduct);
+    const { isDeleted, loading: deleteProductLoading, error } = useSelector(state => state.adminProduct);
     const sortAmount = (a, b) => convertBackToNumber(a) - convertBackToNumber(b);
     const [open, setOpen] = useState(false);
     const [productToDelete, setProductToDelete] = useState("");

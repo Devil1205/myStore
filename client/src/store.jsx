@@ -18,7 +18,7 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   newReview: newReviewReducer,
   newProduct: newProductReducer,
-  deleteProduct: deleteProductReducer
+  adminProduct: deleteProductReducer
 });
 
 const middleware = [thunk];

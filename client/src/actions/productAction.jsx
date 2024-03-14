@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
     ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, CLEAR_ERRORS,
-    PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, CREATE_REVIEW_REQUEST, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL,
+    PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, CREATE_REVIEW_REQUEST, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS, UPDATE_PRODUCT_FAIL,
 } from '../constants/productContants';
 const backend = "http://localhost:5000";
 
@@ -69,6 +69,24 @@ export const deleteProduct = (id) => async (dispatch) => {
         dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success })
     } catch (error) {
         dispatch({ type: DELETE_PRODUCT_FAIL, payload: error.response.data.message })
+    }
+}
+
+export const updateProduct = (id, productData) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_PRODUCT_REQUEST });
+        const config = { headers: { "Content-Type": "application/json" } };
+        const { data } = await axios.put(
+            `${backend}/api/v1/admin/product/${id}`,
+            {
+                ...productData,
+                config
+            },
+            { withCredentials: true }
+        );
+        dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: data.success })
+    } catch (error) {
+        dispatch({ type: UPDATE_PRODUCT_FAIL, payload: error.response.data.message })
     }
 }
 

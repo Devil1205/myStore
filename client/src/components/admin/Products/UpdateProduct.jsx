@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './UpdateProduct.css';
 import './NewProduct.css';
 import '../../User/LoginSignup.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import MetaData from '../../layout/MetaData';
@@ -13,18 +14,19 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { createProduct, clearErrors } from '../../../actions/productAction';
-import { CREATE_PRODUCT_RESET } from '../../../constants/productContants';
+import { clearErrors, getProductDetails, updateProduct } from '../../../actions/productAction';
 import Loader from '../../layout/Loader/Loader';
+import { UPDATE_PRODUCT_RESET } from '../../../constants/productContants';
 
-function NewProduct() {
-
+function UpdateProduct() {
     const categories = ["Phone", "Laptop", "Clothes", "Kitchen"];
 
     const dispatch = useDispatch();
-    const { success, loading, error } = useSelector(state => state.newProduct);
+    const { isUpdated, loading, error } = useSelector(state => state.adminProduct);
+    const { product, loading: productLoading } = useSelector(state => state.productDetails);
     const alert = useAlert();
     const navigate = useNavigate();
+    const params = useParams();
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -33,6 +35,7 @@ function NewProduct() {
     const [category, setCategory] = useState("");
     const [productImagePreview, setProductImagePreview] = useState([]);
     const [productImages, setProductImages] = useState([]);
+    const [imgUpdated, setImgUpdated] = useState(false);
 
     const submitProductForm = (e) => {
         e.preventDefault();
@@ -69,8 +72,9 @@ function NewProduct() {
             stock,
             category,
             images: productImages,
+            imgUpdated
         };
-        dispatch(createProduct(data));
+        dispatch(updateProduct(params.id, data));
     }
 
     const productImageChange = (e) => {
@@ -83,6 +87,7 @@ function NewProduct() {
 
             reader.onload = () => {
                 if (reader.readyState === 2) {
+                    setImgUpdated(true);
                     setProductImages((old) => [...old, reader.result]);
                     setProductImagePreview((old) => [...old, reader.result]);
                 }
@@ -92,21 +97,43 @@ function NewProduct() {
         })
     }
 
+
     useEffect(() => {
-        if (error) {
-            alert.error(error);
-            dispatch(clearErrors());
+        if (!loading) {
+            if (error) {
+                alert.error(error);
+                dispatch(clearErrors());
+            }
+            if (isUpdated) {
+                navigate("/admin/dashboard");
+                alert.success("Product updated successfully");
+                dispatch({ type: UPDATE_PRODUCT_RESET });
+                dispatch(getProductDetails(params.id));
+            }
         }
-        if (success) {
-            navigate("/admin/dashboard");
-            alert.success("Product created successfully");
-            dispatch({ type: CREATE_PRODUCT_RESET });
+
+        if (!product || product._id !== params.id)
+            dispatch(getProductDetails(params.id));
+
+        if (product && product._id === params.id) {
+            setProductImages([]);
+            setProductImagePreview([]);
+            setName(product.name);
+            setCategory(product.category);
+            setDescription(product.description);
+            setPrice(product.price);
+            setStock(product.stock);
+            product.images.forEach((elem) => {
+                setProductImages((old) => [...old, elem.url]);
+                setProductImagePreview((old) => [...old, elem.url]);
+            })
         }
-    }, [dispatch, alert, error, success])
+
+    }, [dispatch, alert, error, isUpdated, product])
 
 
     return (
-        loading ?
+        productLoading || product._id !== params.id ?
             <Loader /> :
             <>
                 < div className='loginSignupContainer' >
@@ -160,7 +187,7 @@ function NewProduct() {
                             </div>
                             <div className='submitButtons'>
                                 <button className="myStoreBtn" type='submit' disabled={loading ? true : false} >Update</button>
-                                <button className="myStoreBtn2" type="reset" disabled={loading ? true : false} onClick={() => { navigate("/admin/dashboard") }}>Cancel</button>
+                                <button className="myStoreBtn2" type='reset' disabled={loading ? true : false} onClick={() => { navigate("/admin/dashboard") }} >Cancel</button>
                             </div>
                         </form>
 
@@ -170,4 +197,4 @@ function NewProduct() {
     )
 }
 
-export default NewProduct
+export default UpdateProduct
