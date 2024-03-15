@@ -33,6 +33,8 @@ import AdminRoute from './components/route/AdminRoute';
 import AdminProducts from './components/admin/Products/Products';
 import NewProduct from './components/admin/Products/NewProduct';
 import UpdateProduct from './components/admin/Products/UpdateProduct';
+import Orders from './components/admin/Orders/Orders';
+import UpdateOrder from './components/admin/Orders/UpdateOrder';
 
 export const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
@@ -100,6 +102,8 @@ function App() {
               <Route exact path="/admin/products" element={<AdminProducts />} />
               <Route exact path="/admin/product/new" element={<NewProduct />} />
               <Route exact path="/admin/product/:id" element={<UpdateProduct />} />
+              <Route exact path="/admin/orders" element={<Orders />} />
+              <Route exact path="/admin/order/:id" element={<UpdateOrder />} />
             </Route>
 
             {/* payment route */}

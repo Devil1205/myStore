@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { deleteProductReducer, newProductReducer, newReviewReducer, productDetailsReducer, productReducer } from './reducers/productReducer';
 import { userReducer, profileReducer, forgotPasswordReducer } from './reducers/userReducer';
 import { cartReducer } from './reducers/cartReducer';
-import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/orderReducer';
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, updateOrderReducer } from './reducers/orderReducer';
 
 const reducer = combineReducers({
   products: productReducer,
@@ -18,7 +18,9 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   newReview: newReviewReducer,
   newProduct: newProductReducer,
-  adminProduct: deleteProductReducer
+  adminProduct: deleteProductReducer,
+  allOrders: allOrdersReducer,
+  adminOrder: updateOrderReducer
 });
 
 const middleware = [thunk];

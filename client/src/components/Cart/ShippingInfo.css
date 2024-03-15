@@ -3,9 +3,9 @@
 }
 
 .shippingInfoBox{
-    max-height: 630px;
+    max-height: 700px;
     height: 90vh;
-    min-height: 630px;
+    min-height: 700px;
 }
 
 .shippingInfoBox>form>div>.MuiFormControl-root{

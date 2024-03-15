@@ -56,6 +56,16 @@ body{
     font-size: 17px;
 }
 
+.myStoreBtn:disabled{
+    cursor: not-allowed;
+    background-color: rgb(255, 148, 129);
+}
+
+.myStoreBtn:disabled:hover{
+    cursor: not-allowed;
+    background-color: rgb(255, 148, 129);
+}
+
 .myStoreBtn:hover{
     background-color: rgb(214, 70, 44);
 }
@@ -69,6 +79,16 @@ body{
     color: white;
     border: none;
     font-size: 17px;
+}
+
+.myStoreBtn2:disabled{
+    background-color: rgb(176, 176, 176);
+    cursor: not-allowed;
+}
+
+.myStoreBtn2:disabled:hover{
+    background-color: rgb(176, 176, 176);
+    cursor: not-allowed;
 }
 
 .myStoreBtn2:hover{

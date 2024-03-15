@@ -47,7 +47,7 @@ function MyOrders() {
             flex: 0.5,
             cellClassName: (params) => {
                 return (
-                    `orderFont ${params.status === "delivered" ? "successColor" : "failColor"}`
+                    `orderFont ${params.row.status === "Delivered" ? "successColor" : "failColor"}`
                 )
             },
             headerClassName: "orderHeaderFont"

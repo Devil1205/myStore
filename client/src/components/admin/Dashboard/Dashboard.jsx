@@ -3,10 +3,11 @@ import './Dashboard.css';
 import Sidebar from './Sidebar';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import { Link } from 'react-router-dom';
-import { Doughnut, Line } from 'react-chartjs-2';
+import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductAdmin } from '../../../actions/productAction';
+import { allOrders } from '../../../actions/orderAction';
 import Loader from '../../layout/Loader/Loader';
 import MetaData from '../../layout/MetaData';
 
@@ -14,7 +15,22 @@ function Dashboard() {
 
     const dispatch = useDispatch();
     const { products, loading } = useSelector(state => state.products);
+    const { orders, loading: orderLoading } = useSelector(state => state.allOrders);
     let outOfStock = 0;
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
 
     products && products.forEach((elem) => {
         if (elem.stock === 0)
@@ -22,38 +38,30 @@ function Dashboard() {
     })
 
     const getMonths = (count) => {
-        const months = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ];
-        return months.splice(0, count);
+        const temp=[...months];
+        return temp.splice(0, count);
     }
 
-    const getEarningLabels = () => {
-        const temp = ["Initial Amount"];
-        temp.push("Amount Earned");
+    const getEarningData = () => {
+        const temp = [];
+        for (let i = 0; i < 12; i++)
+            temp.push(0);
+        orders.forEach((elem) => {
+            const paidMonth = (new Date(elem.paidAt)).getMonth();
+            temp[paidMonth] += elem.totalPrice;
+        })
         return temp;
     }
 
     ChartJS.register(...registerables);
     const earningData = {
-        labels: getEarningLabels(),
+        labels: getMonths(12),
         datasets: [
             {
                 backgroundColor: "tomato",
                 hoverBackgroundColor: "rgb(214, 70, 44)",
-                label: "Total Earning",
-                data: [0, 4000],
+                label: "Total Earning (₹)",
+                data: getEarningData(),
             }
         ]
     }
@@ -117,11 +125,12 @@ function Dashboard() {
 
     useEffect(() => {
         dispatch(getProductAdmin());
+        dispatch(allOrders());
     }, [dispatch])
 
 
     return (
-        loading ?
+        loading || orderLoading ?
             <Loader /> :
             <div className='dashboard'>
                 <MetaData title={`myStore Admin - Dashboard`} />
@@ -143,12 +152,12 @@ function Dashboard() {
                         <Link to="/admin/orders">
                             <PeopleAltRoundedIcon />
                             <p>Total Orders</p>
-                            <div>50</div>
+                            <div>{orders.length}</div>
                         </Link>
                     </div>
                     <div className="linechart">
                         <h2>Earnings</h2>
-                        <Line datasetIdKey="lineChart" data={earningData} options={options} />
+                        <Bar datasetIdKey="lineChart" data={earningData} options={options} />
                     </div>
 
                     <div className="doughnutchart">

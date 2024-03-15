@@ -1,0 +1,22 @@
+.updateOrderContainer>div{
+    background-color: transparent!important;
+}
+
+.updateOrderContainer>div>div{
+    background-color: white;
+}
+
+.updateOrderContainer>div:nth-child(2){
+    padding: 0;
+    width: fit-content;
+}
+
+.updateOrderContainer>div:nth-child(2)>div{
+    margin: 10px 0px;
+    padding: 15px;
+    width: 300px;
+}
+
+.updateOrderContainer>div:nth-child(2)>div:nth-child(2){
+    background-color: #ffffff52;
+}
