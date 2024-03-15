@@ -24,7 +24,7 @@ const createProduct = async (req, res, next) => {
         })
     }
     catch (e) {
-        console.log(e);
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
@@ -135,7 +135,7 @@ const deleteProduct = async (req, res, next) => {
         })
     }
     catch (e) {
-        console.log(e);
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
@@ -191,7 +191,7 @@ const createReview = async (req, res, next) => {
         })
     }
     catch (e) {
-        console.log(e);
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }

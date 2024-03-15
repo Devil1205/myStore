@@ -104,7 +104,7 @@ const updateOrder = async (req, res, next) => {
         return res.status(200).json({ success: true, order });
     }
     catch (e) {
-        console.log(e);
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
@@ -126,7 +126,7 @@ const deleteOrder = async (req, res, next) => {
         return res.status(200).json({ success: true, message: "Order deleted successfully" });
     }
     catch (e) {
-        console.log(e);
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }

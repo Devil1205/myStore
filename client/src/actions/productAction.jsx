@@ -39,7 +39,6 @@ export const getProductAdmin = () => async (dispatch) => {
             type: ADMIN_PRODUCT_FAIL,
             payload: error.response.data.message
         });
-        console.log(error);
     }
 
 }

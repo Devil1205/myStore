@@ -16,7 +16,7 @@ function UpdatePassword() {
     const dispatch = useDispatch();
     const alert = useAlert();
     const { user } = useSelector((state) => state.user);
-    const { isUpdated, error } = useSelector((state) => state.profile);
+    const { isUpdated, error, loading } = useSelector((state) => state.profile);
     const navigate = useNavigate();
 
     const [oldPassword, setOldPassword] = useState("");
@@ -69,7 +69,10 @@ function UpdatePassword() {
                         <LockOutlinedIcon />
                         <input type="password" placeholder="Confirm Password" value={confirmPassword} name="password" onChange={(e) => { setConfirmPassword(e.target.value) }} />
                     </div>
-                    <button className="signupSubmit" type='submit' >Change Password</button>
+                    <div className='submitButtons'>
+                        <button className="myStoreBtn" type='submit' disabled={loading ? true : false} >Change Password</button>
+                        <button className="myStoreBtn2" type='reset' disabled={loading ? true : false} onClick={() => { navigate("/user/profile") }} >Cancel</button>
+                    </div>
                 </form>
             </div>
         </div >

@@ -9,24 +9,26 @@ const registerUser = async (req, res, next) => {
 
     try {
         const { name, email, password, avatar } = req.body;
-        const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-            folder: "avatars",
-            width: 150,
-            crop: "scale"
-        });
         let user = await User.findOne({ email });
         if (user)
-            return next({ status: 409, message: "Email is already registered" });
-        user = await User({
-            name,
-            email,
-            password,
-            avatar: {
-                public_id: myCloud.public_id,
-                url: myCloud.secure_url
-            }
-        });
-        await user.save();
+        return next({ status: 409, message: "Email is already registered" });
+
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale"
+    });
+
+    user = await User({
+        name,
+        email,
+        password,
+        avatar: {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
+    });
+    await user.save();
         await storeJWTToken(user, 201, "User created successfully", res);
     }
     catch (e) {
@@ -170,7 +172,7 @@ const updatePassword = async (req, res, next) => {
         return res.status(200).json({ success: true, message: "Password updated successfully" });
     }
     catch (e) {
-        console.log(e);
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
@@ -181,10 +183,9 @@ const updateProfile = async (req, res, next) => {
         const { name, avatar } = req.body;
         const user = await User.findById(req.user.id);
         user.name = name;
-        console.log(avatar);
         if (avatar !== '') {
             const public_id = user.avatar.public_id;
-            await cloudinary.v2.destroy(public_id);
+            await cloudinary.v2.uploader.destroy(public_id);
             const myCloud = await cloudinary.v2.uploader.upload(avatar, {
                 folder: "avatars",
                 width: 150,
@@ -200,6 +201,7 @@ const updateProfile = async (req, res, next) => {
         return res.status(200).json({ success: true, message: "Profile updated successfully" });
     }
     catch (e) {
+        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
@@ -249,7 +251,7 @@ const updateUserRole = async (req, res, next) => {
         user.email = email;
         user.role = role;
         await user.save();
-        return res.status(200).json({ success: true, user });
+        return res.status(200).json({ success: true });
     }
     catch (e) {
         return next({ status: 500, message: "Internal Server Error" });
@@ -263,7 +265,12 @@ const deleteUser = async (req, res, next) => {
         const user = await User.findByIdAndDelete(id);
         if (!user)
             return next({ status: 404, message: `User does not exist with id: ${id}` });
-        return res.status(200).json({ successs: true, user });
+
+        //delete avatar images from cloudinary
+        const public_id = user.avatar.public_id;
+        await cloudinary.v2.uploader.destroy(public_id);
+
+        return res.status(200).json({ success: true });
     }
     catch (e) {
         return next({ status: 500, message: "Internal Server Error" });

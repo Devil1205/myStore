@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './UpdateProfile.css';
 import './LoginSignup.css';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile, clearErrors } from '../../actions/profileAction';
@@ -16,7 +16,7 @@ function UpdateProfile() {
     const dispatch = useDispatch();
     const alert = useAlert();
     const { user } = useSelector((state) => state.user);
-    const { isUpdated, error } = useSelector((state) => state.profile);
+    const { isUpdated, error, loading } = useSelector((state) => state.profile);
     const navigate = useNavigate();
 
     const [name, setName] = useState(user.name);
@@ -72,19 +72,22 @@ function UpdateProfile() {
                 <form className="loginForm" encType='multipart/form-data' onSubmit={submitSignupForm}>
                     <h3 className='text-center mb-5'>Update Profile</h3>
                     <div className="signupName">
-                        <AccountCircleOutlinedIcon />
+                        <AccountCircleRoundedIcon />
                         <input type="text" placeholder="Name" value={signupData.name} name="name" onChange={signupDataChange} />
                     </div>
                     <div className="signupEmail">
-                        <EmailOutlinedIcon />
-                        <input type="email" placeholder="Email" value={signupData.email} name="email" onChange={signupDataChange} />
+                        <EmailRoundedIcon />
+                        <input type="email" placeholder="Email" disabled={true} value={signupData.email} name="email" onChange={signupDataChange} />
                     </div>
 
                     <div className="registerImage">
                         <img src={avatarPreview} alt="Avatar Preview" />
                         <input type="file" accept="image/*" name="avatar" onChange={signupDataChange} />
                     </div>
-                    <button className="signupSubmit" type='submit' >Update</button>
+                    <div className='submitButtons'>
+                        <button className="myStoreBtn" type='submit' disabled={loading ? true : false} >Update</button>
+                        <button className="myStoreBtn2" type='reset' disabled={loading ? true : false} onClick={() => { navigate("/user/profile") }} >Cancel</button>
+                    </div>
                 </form>
             </div>
         </div >
