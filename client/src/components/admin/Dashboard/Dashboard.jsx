@@ -8,6 +8,7 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductAdmin } from '../../../actions/productAction';
 import { allOrders } from '../../../actions/orderAction';
+import {allUsers} from '../../../actions/userAction';
 import Loader from '../../layout/Loader/Loader';
 import MetaData from '../../layout/MetaData';
 
@@ -16,6 +17,7 @@ function Dashboard() {
     const dispatch = useDispatch();
     const { products, loading } = useSelector(state => state.products);
     const { orders, loading: orderLoading } = useSelector(state => state.allOrders);
+    const { users, loading: userLoading } = useSelector(state => state.allUsers);
     let outOfStock = 0;
     const months = [
         'January',
@@ -82,6 +84,28 @@ function Dashboard() {
         ]
     }
 
+    const getActiveUsersData = () => {
+        const temp = [];
+        for (let i = 0; i < 12; i++)
+            temp.push(0);
+        users.forEach((elem) => {
+            const paidMonth = (new Date(elem.createdAt)).getMonth();
+            temp[paidMonth] += elem.totalPrice;
+        })
+        return temp;
+    }
+
+    const getTotalUsersData = () => {
+        const temp = [];
+        for (let i = 0; i < 12; i++)
+            temp.push(0);
+        users.forEach((elem) => {
+            const paidMonth = (new Date(elem.createdAt)).getMonth();
+            temp[paidMonth] += elem.totalPrice;
+        })
+        return temp;
+    }
+
     const usersData = {
         labels: getMonths(12),
         datasets: [
@@ -96,7 +120,7 @@ function Dashboard() {
                 }
             },
             {
-                label: `Active Users ${2024}`,
+                label: `Active Users`,
                 data: [1, 3, 20, 3],
                 backgroundColor: "#20b228",
                 borderColor: "#3cb74387",
@@ -126,11 +150,12 @@ function Dashboard() {
     useEffect(() => {
         dispatch(getProductAdmin());
         dispatch(allOrders());
+        dispatch(allUsers());
     }, [dispatch])
 
 
     return (
-        loading || orderLoading ?
+        loading || orderLoading || userLoading ?
             <Loader /> :
             <div className='dashboard'>
                 <MetaData title={`myStore Admin - Dashboard`} />
@@ -142,7 +167,7 @@ function Dashboard() {
                         <Link to="/admin/users">
                             <PeopleAltRoundedIcon />
                             <p>Total Users</p>
-                            <div>50</div>
+                            <div>{users.length}</div>
                         </Link>
                         <Link to="/admin/products">
                             <PeopleAltRoundedIcon />

@@ -100,7 +100,7 @@ const updateProduct = async (req, res, next) => {
             }
             req.body.images = images;
         }
-        
+
         delete req.body.imgUpdated;
 
         await product.updateOne(req.body);
@@ -213,7 +213,25 @@ const getAllReviews = async (req, res, next) => {
     }
 }
 
-//delete a review
+//get all reviews of all products -- admin
+const getAllReviewsAdmin = async (req, res, next) => {
+    try {
+        const product = await Product.find({ reviews: { $ne: [] } }).select("reviews");
+        const temp = [];
+        product.forEach((productItem) => {
+            productItem.reviews.forEach((review) => {
+                temp.push({ product: productItem._id, ...review.toObject() });
+            });
+        });
+
+        return res.status(200).json({ success: true, reviews: temp });
+    }
+    catch (e) {
+        return next({ status: 500, message: "Internal Server Error" });
+    }
+}
+
+//delete a review -- admin
 const deleteReview = async (req, res, next) => {
     try {
         const { productId, reviewId } = req.params;
@@ -229,25 +247,29 @@ const deleteReview = async (req, res, next) => {
         if (reviewInd === -1)
             return next({ status: 400, message: "Review not found" });
 
-        //if trying to delete other user's review
-        if (product.reviews[reviewInd].user.toString() !== req.user.id)
-            return next({ status: 403, message: "Only own reviews are permitted to delete" });
+        // //if trying to delete other user's review
+        // if (product.reviews[reviewInd].user.toString() !== req.user.id)
+        //     return next({ status: 403, message: "Only own reviews are permitted to delete" });
 
         product.reviews.splice(reviewInd, 1);
         product.numberOfReviews -= 1;
 
         //update product average rating
         let avgRating = 0;
-        product.reviews.forEach(review => { avgRating += review.rating });
-        product.ratings = (avgRating / product.numberOfReviews).toFixed(2);
+        if (product.numberOfReviews !== 0) {
+            product.reviews.forEach(review => { avgRating += review.rating });
+            product.ratings = (avgRating / product.numberOfReviews).toFixed(2);
+        }
+        else {
+            product.ratings = 0;
+        }
 
         await product.save();
         return res.status(200).json({ success: true, message: "Review deleted successfully" });
     }
     catch (e) {
-        // console.log(e);
         return next({ status: 500, message: "Internal Server Error" });
     }
 }
 
-module.exports = { getProducts, getProductsAdmin, getProduct, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, deleteReview };
+module.exports = { getProducts, getProductsAdmin, getProduct, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, getAllReviewsAdmin, deleteReview };

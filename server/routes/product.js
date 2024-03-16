@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getProducts, getProduct, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, deleteReview, getProductsAdmin } = require('../controllers/productController');
+const { getProducts, getProduct, createProduct, updateProduct, deleteProduct, createReview, getAllReviews, deleteReview, getProductsAdmin, getAllReviewsAdmin } = require('../controllers/productController');
 const { isAuthenticatedUser, isAuthenticatedRole } = require('../middlewares/auth');
 const { createProductValidation, createReviewValidation } = require('../middlewares/productValidation');
 
@@ -28,7 +28,10 @@ router.post("/product/:id/review", isAuthenticatedUser, createReviewValidation.e
 //get all reviews of a product
 router.get("/product/:id/reviews", getAllReviews);
 
-//delete review
-router.delete("/product/:productId/review/:reviewId", isAuthenticatedUser, deleteReview);
+//get all reviews of all products -- admin
+router.get("/admin/reviews", isAuthenticatedUser, isAuthenticatedRole("admin"), getAllReviewsAdmin);
+
+//delete review -- admin
+router.delete("/admin/product/:productId/review/:reviewId", isAuthenticatedUser, isAuthenticatedRole("admin"), deleteReview);
 
 module.exports = router;

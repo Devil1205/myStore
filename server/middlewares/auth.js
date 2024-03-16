@@ -18,8 +18,10 @@ const isAuthenticatedUser = async (req, res, next) => {
 
 const isAuthenticatedRole = (...roles) => {
     return async (req, res, next) => {
+        if (!req.user)
+            return res.status(401).json({ success: "false", message: "Please login to access this feature" });
         const role = req.user.role;
-        if(!roles.includes(role))
+        if (!roles.includes(role))
             return res.status(403).json({ success: "false", message: "Admin permission required" });
         next();
     }
