@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.aboutContainer {
+    min-height: 100vh;
+}
+
+.aboutBanner {
+    position: relative;
+}
+
+.aboutBanner>img {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    object-position: center;
+    min-height: 250px;
+    max-height: 500px;
+    filter: brightness(0.4);
+}
+
+.aboutBanner>span>img{
+    width: 100px;
+    filter: invert(1);
+}
+
+.aboutBanner>span{
+    position: absolute;
+    top: calc(50% - 30px);
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, calc(-50% - 30px));
+    display: flex;
+    align-items: center;
+}
+
+.aboutBanner>span>span{
+    color: #00ff18;
+    font: 900 40px "Josefin Sans", sans-serif;
+    margin: 0px 10px;
+    white-space: nowrap;
+}
+
+.aboutBanner>div {
+    position: absolute;
+    top: calc(50% + 20px);
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 20px));
+    font: 600 30px "Josefin Sans", sans-serif;
+    color: white;
+    width: 90%;
+    text-align: center;
+}

@@ -38,6 +38,7 @@ import UpdateOrder from './components/admin/Orders/UpdateOrder';
 import Users from './components/admin/Users/Users';
 import UpdateUser from './components/admin/Users/UpdateUser';
 import Reviews from './components/admin/Reviews/Reviews';
+import About from './components/About/About';
 
 export const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
@@ -79,6 +80,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/about" element={<About />} />
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/search" element={<Search />} />
