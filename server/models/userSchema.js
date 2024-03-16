@@ -44,6 +44,10 @@ const User = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    loginExpire: [{
+        device: String,
+        expire: Date
+    }],
     resetPasswordToken: String,
     resetPasswordExpire: Date
 });

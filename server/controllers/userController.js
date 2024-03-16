@@ -11,24 +11,24 @@ const registerUser = async (req, res, next) => {
         const { name, email, password, avatar } = req.body;
         let user = await User.findOne({ email });
         if (user)
-        return next({ status: 409, message: "Email is already registered" });
+            return next({ status: 409, message: "Email is already registered" });
 
-    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-        folder: "avatars",
-        width: 150,
-        crop: "scale"
-    });
+        const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+            folder: "avatars",
+            width: 150,
+            crop: "scale"
+        });
 
-    user = await User({
-        name,
-        email,
-        password,
-        avatar: {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url
-        }
-    });
-    await user.save();
+        user = await User({
+            name,
+            email,
+            password,
+            avatar: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            }
+        });
+        await user.save();
         await storeJWTToken(user, 201, "User created successfully", res);
     }
     catch (e) {
@@ -64,10 +64,22 @@ const loginUser = async (req, res, next) => {
 const logoutUser = async (req, res, next) => {
 
     try {
+
+        const token = req.cookies.token;
+        const user = await User.findById(req.user.id);
         res.cookie("token", null, {
             expires: new Date(Date.now()),
             httpOnly: true
         });
+
+        const arr = [];
+        user.loginExpire.forEach((elem) => {
+            if (elem.device !== token)
+                arr.push(elem);
+        });
+        user.loginExpire = arr;
+        await user.save();
+
         return res.status(200).json({ success: true, message: "User logged out successfully" });
     }
     catch (e) {

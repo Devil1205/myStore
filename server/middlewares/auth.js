@@ -12,6 +12,16 @@ const isAuthenticatedUser = async (req, res, next) => {
     }
     catch (e) {
         // console.log(e);
+        const user = await User.findOne({ "loginExpire.device": token });
+        if (user) {
+            const arr = [];
+            user.loginExpire.forEach((elem) => {
+                if (elem.device !== token)
+                    arr.push(elem);
+            });
+            user.loginExpire = arr;
+            await user.save();
+        }
         return res.status(401).json({ success: "false", message: "Please login to access this feature" });
     }
 }

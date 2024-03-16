@@ -8,7 +8,7 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductAdmin } from '../../../actions/productAction';
 import { allOrders } from '../../../actions/orderAction';
-import {allUsers} from '../../../actions/userAction';
+import { allUsers } from '../../../actions/userAction';
 import Loader from '../../layout/Loader/Loader';
 import MetaData from '../../layout/MetaData';
 
@@ -39,11 +39,13 @@ function Dashboard() {
             outOfStock++;
     })
 
+    //calculate and return months as mapped
     const getMonths = (count) => {
-        const temp=[...months];
+        const temp = [...months];
         return temp.splice(0, count);
     }
 
+    //calculate the earning data
     const getEarningData = () => {
         const temp = [];
         for (let i = 0; i < 12; i++)
@@ -56,6 +58,8 @@ function Dashboard() {
     }
 
     ChartJS.register(...registerables);
+
+    //earning data graph
     const earningData = {
         labels: getMonths(12),
         datasets: [
@@ -68,6 +72,7 @@ function Dashboard() {
         ]
     }
 
+    //products data graph
     const productData = {
         labels: ["Total Products", "In Stock", "Out of Stock"],
         datasets: [
@@ -84,34 +89,46 @@ function Dashboard() {
         ]
     }
 
+    //calculate the active users data
     const getActiveUsersData = () => {
         const temp = [];
         for (let i = 0; i < 12; i++)
             temp.push(0);
-        users.forEach((elem) => {
-            const paidMonth = (new Date(elem.createdAt)).getMonth();
-            temp[paidMonth] += elem.totalPrice;
-        })
+
+        //calculate the max value of expiry month of a user logged in multiple places
+        for (let i = 0; i < users.length; i++) {
+            let activeMonth = -1;
+            for (let j = 0; j < users[i].loginExpire.length; j++) {
+                const temp = (new Date(users[i].loginExpire[j].expire)).getMonth();
+                if (temp > activeMonth)
+                    activeMonth = temp;
+            }
+            if (activeMonth !== -1)
+                temp[activeMonth] += 1;
+        }
         return temp;
     }
 
+    //calculate the total users data
     const getTotalUsersData = () => {
         const temp = [];
         for (let i = 0; i < 12; i++)
             temp.push(0);
+
         users.forEach((elem) => {
-            const paidMonth = (new Date(elem.createdAt)).getMonth();
-            temp[paidMonth] += elem.totalPrice;
+            const month = (new Date(elem.createdAt)).getMonth();
+            temp[month] += 1;
         })
         return temp;
     }
 
+    //users data graph
     const usersData = {
         labels: getMonths(12),
         datasets: [
             {
                 label: "Total Users",
-                data: [2, 30, 5, 3],
+                data: getTotalUsersData(),
                 backgroundColor: "tomato",
                 borderColor: "#ff796180",
                 fill: {
@@ -121,7 +138,7 @@ function Dashboard() {
             },
             {
                 label: `Active Users`,
-                data: [1, 3, 20, 3],
+                data: getActiveUsersData(),
                 backgroundColor: "#20b228",
                 borderColor: "#3cb74387",
                 fill: {
