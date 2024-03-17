@@ -11,12 +11,12 @@ const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 
 app.use(cors({
-    origin: ["https://mystore-devil1205.vercel.app/"],
+    origin: ["https://mystore-devil1205.vercel.app", "http://localhost:5173"],
     credentials: true
 }));
 
 //Body parser
-app.use(express.json({limit: "5mb"}));
+app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true, limit: "5mb" }))
 
 //cookie parser
