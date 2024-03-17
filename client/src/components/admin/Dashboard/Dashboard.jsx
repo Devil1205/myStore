@@ -50,7 +50,7 @@ function Dashboard() {
         const temp = [];
         for (let i = 0; i < 12; i++)
             temp.push(0);
-        orders.forEach((elem) => {
+        orders && orders.forEach((elem) => {
             const paidMonth = (new Date(elem.paidAt)).getMonth();
             temp[paidMonth] += elem.totalPrice;
         })
@@ -78,12 +78,12 @@ function Dashboard() {
         datasets: [
             {
                 label: "Products",
-                data: [products.length, 0, 0],
+                data: [products && products.length, 0, 0],
                 backgroundColor: ["#74bfff", "#60ce66", "#ff6868"]
             },
             {
                 label: "Products",
-                data: [0, products.length - outOfStock, outOfStock],
+                data: [0, products && products.length - outOfStock, outOfStock],
                 backgroundColor: ["#74bfff", "#60ce66", "#ff6868"]
             },
         ]
@@ -115,7 +115,7 @@ function Dashboard() {
         for (let i = 0; i < 12; i++)
             temp.push(0);
 
-        users.forEach((elem) => {
+        users && users.forEach((elem) => {
             const month = (new Date(elem.createdAt)).getMonth();
             temp[month] += 1;
         })
@@ -172,7 +172,7 @@ function Dashboard() {
 
 
     return (
-        loading || orderLoading || userLoading ?
+        !products || !users || !orders ?
             <Loader /> :
             <div className='dashboard'>
                 <MetaData title={`myStore Admin - Dashboard`} />
