@@ -11,7 +11,7 @@ const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 
 app.use(cors({
-    origin: ["http://localhost:5173", "https://mystore-devil1205.vercel.app"],
+    origin: "*",
     credentials: true
 }));
 
