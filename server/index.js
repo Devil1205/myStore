@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(fileUpload());
 
 //configure env path
-env.config({ path: "./config/config.env" });
+env.config();
 
 //connectDb function call
 connectDb();
