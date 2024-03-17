@@ -11,7 +11,7 @@ import LoginSignup from './components/User/LoginSignup';
 import { useEffect, useState } from 'react';
 import store from './store';
 import { loadUser } from './actions/userAction';
-import UserOptions from './components/layout/Header/userOptions';
+import UserOptions from './components/layout/Header/UserOptions';
 import Profile from './components/User/Profile';
 import ProtectedRoute from './components/route/ProtectedRoute';
 import UpdateProfile from './components/User/UpdateProfile';
