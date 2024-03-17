@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './OrderSuccess.css';
-import OrderPlacedImage from '../../Images/OrderPlaced.svg';
+import OrderPlacedImage from '../../Images/orderPlaced.svg';
 import OrderSteps from './OrderSteps';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
