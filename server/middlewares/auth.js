@@ -8,6 +8,8 @@ const isAuthenticatedUser = async (req, res, next) => {
     try {
         const id = jwt.verify(token, process.env.JWT_SECRET);
         req.user = await User.findById(id.id);
+        if (!user)
+            return res.status(401).json({ success: "false", message: "Please login to access this feature" });
         next();
     }
     catch (e) {
