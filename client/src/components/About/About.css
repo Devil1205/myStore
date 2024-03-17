@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap');
 
 .aboutContainer {
     min-height: 100vh;
+    font: 400 22px 'Roboto';
 }
 
 .aboutBanner {
@@ -13,40 +15,125 @@
     height: 50vh;
     object-fit: cover;
     object-position: center;
-    min-height: 250px;
+    min-height: 300px;
     max-height: 500px;
-    filter: brightness(0.4);
-}
-
-.aboutBanner>span>img{
-    width: 100px;
-    filter: invert(1);
-}
-
-.aboutBanner>span{
-    position: absolute;
-    top: calc(50% - 30px);
-    left: 50%;
-    z-index: 1;
-    transform: translate(-50%, calc(-50% - 30px));
-    display: flex;
-    align-items: center;
-}
-
-.aboutBanner>span>span{
-    color: #00ff18;
-    font: 900 40px "Josefin Sans", sans-serif;
-    margin: 0px 10px;
-    white-space: nowrap;
+    filter: brightness(0.3);
 }
 
 .aboutBanner>div {
     position: absolute;
-    top: calc(50% + 20px);
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, calc(-50% + 20px));
+    transform: translate(-50%, -50%);
     font: 600 30px "Josefin Sans", sans-serif;
     color: white;
     width: 90%;
     text-align: center;
+}
+
+.aboutBanner>div>img {
+    width: 100px;
+    filter: invert(1);
+}
+
+.aboutBanner>div>div{
+    margin: 10px 0px;
+}
+
+.aboutBanner>div>div:nth-child(2)
+{
+    color: rgb(0, 255, 76);
+    font: 600 50px "Baloo Bhaijaan 2", sans-serif;;
+}
+
+.aboutBanner>div>div:last-child{
+    margin: 20px 0px;
+    height: 50px;
+}
+
+.aboutContent{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.aboutContent>div{
+    margin: 20px;
+}
+
+.aboutContent>div>h3{
+    padding: 5px 15px;
+    border-bottom: 1px solid #dcdcdc;
+    width: fit-content;
+    margin: auto;
+    max-width: 400px;
+    font: 800 40px "Josefin Sans", sans-serif;
+    color: tomato;
+}
+
+.aboutContent>div>p{
+    color: #747070;
+    margin-top: 15px;
+}
+
+.aboutContent>div>img{
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-top: 20px;
+}
+
+.aboutContent>div:first-child{
+    max-width: 400px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.aboutContent>div:last-child>div:nth-child(3){
+    font: 500 30px 'Roboto';
+    text-align: center;
+    margin-top: 15px;
+}   
+
+.socialMedia{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.socialMedia>a{
+    margin: 5px 10px;
+}
+
+.socialMedia>a>svg{
+    font-size: 40px;
+    color: tomato;
+}
+
+.socialMedia>a>i{
+    font-size: 40px;
+    color: tomato;
+}
+
+.github:hover{
+    color: black;
+}
+
+.linkedIn:hover{
+    color: #0077b5;
+}
+
+@media screen and (max-width: 850px) {
+    .aboutContent{
+        flex-direction: column;
+    }
+    .aboutContent>div {
+        margin: 20px 0px;
+    }
 }

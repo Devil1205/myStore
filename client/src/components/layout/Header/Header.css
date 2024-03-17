@@ -59,6 +59,14 @@
     border-radius: 100%;
 }
 
+.nav4>a>svg{
+    color: tomato!important;
+}
+
+.nav4>a>svg:hover{
+    color: rgb(180, 51, 28)!important;
+}
+
 @media screen and (max-width: 1000px) {
 
     .nav2,

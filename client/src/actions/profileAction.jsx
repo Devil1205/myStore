@@ -1,6 +1,6 @@
 import { UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL, CLEAR_ERRORS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL } from "../constants/userConstants";
 import axios from "axios";
-const backend = "http://localhost:5000";
+const backend = import.meta.env.VITE_BACKEND;
 
 export const updateProfile = (userData) => async (dispatch) => {
     try {

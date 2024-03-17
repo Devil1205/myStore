@@ -28,7 +28,7 @@ function Header() {
             link2Text="Products"
             link2Url="/products"
             link3Text="About"
-            link3Url="/About"
+            link3Url="/about"
             link4Text="Contact"
             link4Url="/contact"
             link1Size="30px"

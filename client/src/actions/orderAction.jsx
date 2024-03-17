@@ -1,6 +1,6 @@
 import { ADMIN_ORDER_DETAILS_FAIL, ADMIN_ORDER_DETAILS_REQUEST, ADMIN_ORDER_DETAILS_SUCCESS, ALL_ORDERS_FAIL, ALL_ORDERS_REQUEST, ALL_ORDERS_SUCCESS, CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, DELETE_ORDER_FAIL, DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, UPDATE_ORDER_FAIL, UPDATE_ORDER_REQUEST, UPDATE_ORDER_SUCCESS } from "../constants/orderConstants"
 import axios from 'axios';
-const backend = "http://localhost:5000";
+const backend = import.meta.env.VITE_BACKEND;
 
 //create new order -- admin
 export const createOrder = (orderData) => async (dispatch) => {
@@ -29,6 +29,7 @@ export const allOrders = () => async (dispatch) => {
         const { data } = await axios.get(`${backend}/api/v1/admin/orders`, { withCredentials: true });
         dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders })
     } catch (error) {
+        console.log(error);
         dispatch({ type: ALL_ORDERS_FAIL, payload: error.response.data.message });
     }
 }

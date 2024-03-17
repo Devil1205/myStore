@@ -1,0 +1,66 @@
+.contactContainer {
+    min-height: 100vh;
+    font: 400 22px 'Roboto';
+}
+
+.contactCard {
+    min-width: 270px;
+    max-width: 400px;
+    width: 100%;
+    background-color: white;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.contactCard>h3 {
+    background-color: tomato;
+    color: white;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    margin: 0;
+}
+
+.contactCard>div {
+    padding: 30px 25px;
+}
+
+.contactCard>div>div {
+    padding: 8px 0px;
+    display: flex;
+    overflow-wrap: anywhere;
+}
+
+.contactCard>div>div>span,
+.contactCard>div>div>a {
+    margin-left: 20px;
+}
+
+.contactCard>div>div>a:hover{
+    text-decoration: underline;
+}
+
+.contactContainer>div:nth-child(2) {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.contactContainer>div:nth-child(2)>div:nth-child(2) {
+    max-width: 320px;
+    color: gray;
+    padding: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    .contactContainer>div:nth-child(2){
+        flex-direction: column;
+    }
+}
