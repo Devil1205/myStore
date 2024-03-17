@@ -32,6 +32,7 @@ function OrderDetails() {
         loading || !order ?
             <Loader /> :
             <div className="checkout">
+            <MetaData title={`${user.name} - Order ${order._id}`} />
                 <div className='checkoutContainer'>
 
                     <div>
