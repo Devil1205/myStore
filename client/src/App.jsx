@@ -40,6 +40,7 @@ import UpdateUser from './components/admin/Users/UpdateUser';
 import Reviews from './components/admin/Reviews/Reviews';
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
+import { useSelector, useDispatch } from 'react-redux';
 
 export const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
@@ -53,14 +54,13 @@ export const convertBackToNumber = (num) => {
 }
 
 function App() {
-  
 
+  const dispatch = useDispatch();
+  const { user, error, loading } = useSelector(state => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
-  const [loading, setLoading] = useState(true);
 
   const fetchStripeApiKey = async () => {
     try {
-      setLoading(false);
       const { data } = await axios.get(`/api/v1/payment/getApiKey`, { withCredentials: true });
       setStripeApiKey(data.key);
     } catch (error) {
@@ -69,9 +69,13 @@ function App() {
   }
 
   useEffect(() => {
-    store.dispatch(loadUser());
-    fetchStripeApiKey();
-  }, [store.dispatch])
+    if (!loading) {
+      if (user && Object.keys(user).length === 0)
+        dispatch(loadUser());
+      else
+        fetchStripeApiKey();
+    }
+  }, [dispatch, user])
 
 
   return (
@@ -117,7 +121,7 @@ function App() {
             </Route>
 
             {/* payment route */}
-            <Route exact path="/payment" element={!loading && stripeApiKey ? <Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements> : <Navigate to="/cart" />} />
+            <Route exact path="/payment" element={stripeApiKey ? <Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements> : <Navigate to="/cart" />} />
 
           </Route>
 

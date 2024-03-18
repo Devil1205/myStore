@@ -11,6 +11,7 @@ import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded
 import { Country, State } from 'country-state-city';
 import { formatNumber } from '../../App';
 import '../Cart/Checkout.css';
+import MetaData from '../layout/MetaData';
 
 function OrderDetails() {
 
@@ -18,6 +19,7 @@ function OrderDetails() {
     const dispatch = useDispatch();
     const alert = useAlert();
     const { loading, error, order } = useSelector(state => state.orderDetails);
+    const { user } = useSelector(state => state.user);
 
     useEffect(() => {
         if (error) {
@@ -32,7 +34,7 @@ function OrderDetails() {
         loading || !order ?
             <Loader /> :
             <div className="checkout">
-            <MetaData title={`${user.name} - Order ${order._id}`} />
+            <MetaData title={`${user && user.name} - Order ${order._id}`} />
                 <div className='checkoutContainer'>
 
                     <div>

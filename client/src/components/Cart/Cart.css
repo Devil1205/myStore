@@ -89,6 +89,9 @@
         flex-direction: column;
         /* align-items: center; */
     }
+    .cartItemBlock-1{
+        margin: auto;
+    }
 }
 
 @keyframes cartAnimation {
