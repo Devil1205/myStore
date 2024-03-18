@@ -44,7 +44,7 @@ app.use("/api/v1/", require('./routes/payment'));
 app.use(errorHandler);
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.get("*", (req,res)=>{
-    res.sendFile("../client/dist/index.html");
+    res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
 })
 
 app.listen(port, () => {
