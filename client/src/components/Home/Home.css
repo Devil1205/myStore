@@ -11,7 +11,6 @@
     z-index: 1;
     position: relative;
     width: 100%;
-    max-height: 120vw;
 }
 
 .banner::after{
@@ -24,6 +23,7 @@
     background: #471111;
     clip-path: polygon(50% 100%, 0 0, 50% 45%, 100% 0);
     z-index: -1;
+    max-height: 100vw;
 }
 
 .banner > h1{
