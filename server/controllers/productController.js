@@ -56,7 +56,7 @@ const getProductsAdmin = async (req, res, next) => {
 const getProduct = async (req, res, next) => {
     try {
         const product = await Product.findById(req.params.id);
-
+        
         //if no product found, return error
         if (!product) {
             return next({ status: 400, message: "Product not found" });

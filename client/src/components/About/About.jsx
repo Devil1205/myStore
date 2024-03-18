@@ -42,13 +42,13 @@ function About() {
                     <img src={aboutCreator} alt="Pulkit Sachdeva" />
                     <div>Pulkit Sachdeva</div>
                     <div className="socialMedia">
-                        <Link to="/">
+                        <Link to="https://github.com/Devil1205">
                             <GitHubIcon className='github' />
                         </Link>
-                        <Link to='/'>
+                        <Link to='https://www.instagram.com/_im_pulkit'>
                             <MDBIcon className='insta' size='2x' fab icon="instagram" />
                         </Link>
-                        <Link to='/'>
+                        <Link to='https://www.linkedin.com/in/pulkit-sachdeva-8a72a7121'>
                             <i class="fab fa-linkedin-in linkedIn"></i>
                         </Link>
                     </div>
