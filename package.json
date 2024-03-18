@@ -4,7 +4,8 @@
     "server-install": "cd server && npm install",
     "postinstall": "concurrently \"npm run client-install\" \"npm run server-install\"",
     "build": "cd client && npm run build",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
   },
   "dependencies": {
     "concurrently": "^8.2.2",

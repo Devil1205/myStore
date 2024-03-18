@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const cloudinary = require('cloudinary');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 app.use(cors({
     origin: ["https://mystore-devil1205.vercel.app", "http://localhost:5173"],
@@ -41,6 +42,10 @@ app.use("/api/v1/", require('./routes/order'));
 app.use("/api/v1/", require('./routes/payment'));
 
 app.use(errorHandler);
+app.use(express.static(path.join(__dirname, "../client/dist")));
+app.get("*", (req,res)=>{
+    res.sendFile("../client/dist/index.html");
+})
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
