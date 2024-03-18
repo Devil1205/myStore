@@ -1,13 +1,13 @@
 import { UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL, CLEAR_ERRORS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL } from "../constants/userConstants";
 import axios from "axios";
-const backend = import.meta.env.VITE_BACKEND;
+
 
 export const updateProfile = (userData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PROFILE_REQUEST });
         const config = { headers: { "Content-Type": "multipart/form-data" } };
         await axios.put(
-            `${backend}/api/v1/profile/update`,
+            `/api/v1/profile/update`,
             {
                 ...userData,
                 config
@@ -25,7 +25,7 @@ export const updatePassword = (newPassword) => async (dispatch) => {
         dispatch({ type: UPDATE_PASSWORD_REQUEST });
         const config = { headers: { "Content-Type": "applicaton/json" } };
         await axios.put(
-            `${backend}/api/v1/password/update`,
+            `/api/v1/password/update`,
             {
                 ...newPassword,
                 config
@@ -43,7 +43,7 @@ export const resetPassword = (newPassword, token) => async (dispatch) => {
         dispatch({ type: RESET_PASSWORD_REQUEST });
         const config = { headers: { "Content-Type": "applicaton/json" } };
         await axios.put(
-            `${backend}/api/v1/password/reset/${token}`,
+            `/api/v1/password/reset/${token}`,
             {
                 ...newPassword,
                 config

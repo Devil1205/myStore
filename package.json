@@ -1,5 +1,14 @@
 {
+  "scripts": {
+    "client-install": "cd client && npm install --force",
+    "server-install": "cd server && npm install",
+    "postinstall": "concurrently \"run client-install\" \"run server-install\"",
+    "build": "cd client && npm run build",
+    "prestart": "cd client && npm run build",
+    "start": "node server/index.js"
+  },
   "dependencies": {
+    "concurrently": "^8.2.2",
     "dotenv": "^16.3.1"
   }
 }

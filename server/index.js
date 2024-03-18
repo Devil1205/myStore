@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const cloudinary = require('cloudinary');
 const fileUpload = require('express-fileupload');
-const bodyParser = require('body-parser');
 
 app.use(cors({
     origin: ["https://mystore-devil1205.vercel.app", "http://localhost:5173"],

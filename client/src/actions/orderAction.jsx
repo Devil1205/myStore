@@ -1,6 +1,6 @@
 import { ADMIN_ORDER_DETAILS_FAIL, ADMIN_ORDER_DETAILS_REQUEST, ADMIN_ORDER_DETAILS_SUCCESS, ALL_ORDERS_FAIL, ALL_ORDERS_REQUEST, ALL_ORDERS_SUCCESS, CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, DELETE_ORDER_FAIL, DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, UPDATE_ORDER_FAIL, UPDATE_ORDER_REQUEST, UPDATE_ORDER_SUCCESS } from "../constants/orderConstants"
 import axios from 'axios';
-const backend = import.meta.env.VITE_BACKEND;
+
 
 //create new order -- admin
 export const createOrder = (orderData) => async (dispatch) => {
@@ -8,7 +8,7 @@ export const createOrder = (orderData) => async (dispatch) => {
         dispatch({ type: CREATE_ORDER_REQUEST });
         const config = { headers: { "Content-Type": "application/json" } };
         const { data } = await axios.post(
-            `${backend}/api/v1/order/new`,
+            `/api/v1/order/new`,
             {
                 ...orderData,
                 config
@@ -26,7 +26,7 @@ export const createOrder = (orderData) => async (dispatch) => {
 export const allOrders = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ORDERS_REQUEST });
-        const { data } = await axios.get(`${backend}/api/v1/admin/orders`, { withCredentials: true });
+        const { data } = await axios.get(`/api/v1/admin/orders`, { withCredentials: true });
         dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders })
     } catch (error) {
         console.log(error);
@@ -38,7 +38,7 @@ export const allOrders = () => async (dispatch) => {
 export const getAdminOrderDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_ORDER_DETAILS_REQUEST });
-        const { data } = await axios.get(`${backend}/api/v1/admin/order/${id}`, { withCredentials: true });
+        const { data } = await axios.get(`/api/v1/admin/order/${id}`, { withCredentials: true });
         dispatch({ type: ADMIN_ORDER_DETAILS_SUCCESS, payload: data.order })
     } catch (error) {
         dispatch({ type: ADMIN_ORDER_DETAILS_FAIL, payload: error.response.data.message });
@@ -51,7 +51,7 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
         dispatch({ type: UPDATE_ORDER_REQUEST });
         const config = { headers: { "Content-Type": "application/json" } };
         const { data } = await axios.put(
-            `${backend}/api/v1/admin/order/${id}`,
+            `/api/v1/admin/order/${id}`,
             {
                 ...orderData,
                 config
@@ -68,7 +68,7 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
 export const deleteOrder = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_ORDER_REQUEST });
-        const { data } = await axios.delete(`${backend}/api/v1/admin/order/${id}`, { withCredentials: true });
+        const { data } = await axios.delete(`/api/v1/admin/order/${id}`, { withCredentials: true });
         dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success })
     } catch (error) {
         dispatch({ type: DELETE_ORDER_FAIL, payload: error.response.data.message });
@@ -80,7 +80,7 @@ export const deleteOrder = (id) => async (dispatch) => {
 export const myOrders = () => async (dispatch) => {
     try {
         dispatch({ type: MY_ORDERS_REQUEST });
-        const { data } = await axios.get(`${backend}/api/v1/profile/orders`, { withCredentials: true });
+        const { data } = await axios.get(`/api/v1/profile/orders`, { withCredentials: true });
         dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders })
     } catch (error) {
         dispatch({ type: MY_ORDERS_FAIL, payload: error.response.data.message });
@@ -92,7 +92,7 @@ export const myOrders = () => async (dispatch) => {
 export const getOrderDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: ORDER_DETAILS_REQUEST });
-        const { data } = await axios.get(`${backend}/api/v1/order/${id}`, { withCredentials: true });
+        const { data } = await axios.get(`/api/v1/order/${id}`, { withCredentials: true });
         dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order })
     } catch (error) {
         dispatch({ type: ORDER_DETAILS_FAIL, payload: error.response.data.message });

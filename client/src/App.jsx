@@ -53,7 +53,7 @@ export const convertBackToNumber = (num) => {
 }
 
 function App() {
-  const backend = import.meta.env.VITE_BACKEND;
+  
 
   const [stripeApiKey, setStripeApiKey] = useState("");
   const [loading, setLoading] = useState(true);
@@ -61,7 +61,7 @@ function App() {
   const fetchStripeApiKey = async () => {
     try {
       setLoading(false);
-      const { data } = await axios.get(`${backend}/api/v1/payment/getApiKey`, { withCredentials: true });
+      const { data } = await axios.get(`/api/v1/payment/getApiKey`, { withCredentials: true });
       setStripeApiKey(data.key);
     } catch (error) {
       console.log(error);
