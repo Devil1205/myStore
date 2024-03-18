@@ -18,7 +18,7 @@ function Products() {
     const alert = useAlert();
     const dispatch = useDispatch();
     const [currentPage, setcurrentPage] = useState(1);
-    const [productsPerPage, setProductsPerPage] = useState(2);
+    const [productsPerPage, setProductsPerPage] = useState(4);
     const [price, setPrice] = useState([0, 100000]);
     const [tempPrice, setTempPrice] = useState(price);
     const [category, setCategory] = useState('');
@@ -187,7 +187,7 @@ function Products() {
                                 onChange={(e) => { setProductsPerPage(e.target.value); setcurrentPage(1) }}
                                 sx={{ height: "37.6px" }}
                             >
-                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={2}>4</MenuItem>
                                 <MenuItem value={8}>8</MenuItem>
                                 <MenuItem value={12}>12</MenuItem>
                                 <MenuItem value={16}>16</MenuItem>

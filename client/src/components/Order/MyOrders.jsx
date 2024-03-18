@@ -129,7 +129,7 @@ function MyOrders() {
                                 paginationModel: { page: 0, pageSize: 8 },
                             },
                         }}
-                        pageSizeOptions={[5]}
+                        pageSizeOptions={[8]}
                         disableRowSelectionOnClick
                         autoHeight
                     />
