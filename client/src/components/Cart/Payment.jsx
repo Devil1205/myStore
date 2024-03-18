@@ -24,7 +24,6 @@ import { createOrder } from '../../actions/orderAction';
 
 function Payment() {
 
-    const backend = "http://localhost:5000";
     const order = sessionStorage.getItem("orderInfo") ? JSON.parse(sessionStorage.getItem("orderInfo")) : "";
     const navigate = useNavigate();
     const { user } = useSelector(state => state.user);
@@ -58,7 +57,7 @@ function Payment() {
         try {
             const config = { headers: { "Content-Type": "application/json" } };
             const { data } = await axios.post(
-                `${backend}/api/v1/payment/process`,
+                `/api/v1/payment/process`,
                 {
                     ...paymentData,
                     config
