@@ -90,15 +90,18 @@ const updateOrder = async (req, res, next) => {
         if (order.orderStatus === "Delivered")
             return next({ status: 404, message: "This order has already been delivered" });
 
-        //update is product stock quantity
-        order.orderItems.forEach(async (item) => {
-            await updateProductStock(item.product, item.quantity);
-        });
-
         const { orderStatus } = req.body;
+        order.orderStatus = orderStatus;
+
+        //update is product stock quantity when it is shipped
+        if (order.orderStatus === "Shipped") {
+            order.orderItems.forEach(async (item) => {
+                await updateProductStock(item.product, item.quantity);
+            });
+        }
+
         if (orderStatus === "Delivered")
             order.deliveredAt = Date.now();
-        order.orderStatus = orderStatus;
         await order.save();
 
         return res.status(200).json({ success: true, order });
@@ -122,6 +125,13 @@ const deleteOrder = async (req, res, next) => {
 
         if (!order)
             return next({ status: 404, message: "This order does not exist" });
+
+        //update is product stock quantity when it is shipped
+        if (order.orderStatus === "Shipped") {
+            order.orderItems.forEach(async (item) => {
+                await updateProductStock(item.product, -item.quantity);
+            });
+        }
 
         return res.status(200).json({ success: true, message: "Order deleted successfully" });
     }

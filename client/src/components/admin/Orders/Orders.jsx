@@ -106,7 +106,7 @@ function Orders() {
                         <IconButton color='success' aria-label="Edit Order" disabled={orderToDelete === params.id} onClick={() => { navigate("/admin/order/" + params.id) }}>
                             <EditRoundedIcon />
                         </IconButton>
-                        <IconButton color='error' aria-label="Delete Order" disabled={(orderToDelete === params.id)||(params.row.status!=="Processing")} onClick={() => { setOrderToDelete(params.id); toggleDialog(); }}>
+                        <IconButton color='error' aria-label="Delete Order" disabled={(orderToDelete === params.id)||(params.row.status==="Delivered")} onClick={() => { setOrderToDelete(params.id); toggleDialog(); }}>
                             <DeleteRoundedIcon />
                         </IconButton>
                     </>
