@@ -26,7 +26,7 @@ This project is a robust ecommerce web application built using the MERN stack (M
 1. **Clone the repository:**
 
    ```
-   git clone https://github.com/your-username/ecommerce-web-app.git
+   git clone https://github.com/Devil1205/myStore.git
    ```
 
 2. **Install dependencies:**
