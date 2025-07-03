@@ -10,6 +10,7 @@ const cloudinary = require('cloudinary');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 
+console.log("Environment: " + process.env.URI);
 app.use(cors({
     origin: ["https://mystore-devil1205.vercel.app", "http://localhost:5173"],
     credentials: true
@@ -24,7 +25,7 @@ app.use(cookieParser());
 app.use(fileUpload());
 
 //configure env path
-env.config();
+env.config({path: "./server/.env"});
 
 //connectDb function call
 connectDb();
