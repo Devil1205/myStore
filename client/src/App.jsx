@@ -61,7 +61,7 @@ function App() {
 
   const fetchStripeApiKey = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/payment/getApiKey`, { withCredentials: true });
+      const { data } = await axios.get(`${import.meta.env.VITE_ENVIRONMENT==="dev"?import.meta.env.VITE_BASE_API_URL:""}/api/v1/payment/getApiKey`, { withCredentials: true });
       setStripeApiKey(data.key);
     } catch (error) {
       console.log(error);

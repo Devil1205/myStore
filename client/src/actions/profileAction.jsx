@@ -7,7 +7,7 @@ export const updateProfile = (userData) => async (dispatch) => {
         dispatch({ type: UPDATE_PROFILE_REQUEST });
         const config = { headers: { "Content-Type": "multipart/form-data" } };
         await axios.put(
-            `/api/v1/profile/update`,
+            `${import.meta.env.VITE_ENVIRONMENT==="dev"?import.meta.env.VITE_BASE_API_URL:""}/api/v1/profile/update`,
             {
                 ...userData,
                 config
@@ -25,7 +25,7 @@ export const updatePassword = (newPassword) => async (dispatch) => {
         dispatch({ type: UPDATE_PASSWORD_REQUEST });
         const config = { headers: { "Content-Type": "applicaton/json" } };
         await axios.put(
-            `/api/v1/password/update`,
+            `${import.meta.env.VITE_ENVIRONMENT==="dev"?import.meta.env.VITE_BASE_API_URL:""}/api/v1/password/update`,
             {
                 ...newPassword,
                 config
@@ -43,7 +43,7 @@ export const resetPassword = (newPassword, token) => async (dispatch) => {
         dispatch({ type: RESET_PASSWORD_REQUEST });
         const config = { headers: { "Content-Type": "applicaton/json" } };
         await axios.put(
-            `/api/v1/password/reset/${token}`,
+            `${import.meta.env.VITE_ENVIRONMENT==="dev"?import.meta.env.VITE_BASE_API_URL:""}/api/v1/password/reset/${token}`,
             {
                 ...newPassword,
                 config

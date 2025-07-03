@@ -57,7 +57,7 @@ function Payment() {
         try {
             const config = { headers: { "Content-Type": "application/json" } };
             const { data } = await axios.post(
-                `/api/v1/payment/process`,
+                `${import.meta.env.VITE_ENVIRONMENT==="dev"?import.meta.env.VITE_BASE_API_URL:""}/api/v1/payment/process`,
                 {
                     ...paymentData,
                     config

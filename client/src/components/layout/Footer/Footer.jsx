@@ -29,10 +29,10 @@ function Footer() {
                     <Link to='/' className='text-reset'>
                         Shipping
                     </Link>
-                    <Link to='/' className='text-reset'>
+                    <Link to='/contact' className='text-reset'>
                         Contact Us
                     </Link>
-                    <Link to='/' className='text-reset'>
+                    <Link to='/about' className='text-reset'>
                         About Us
                     </Link>
                 </div>

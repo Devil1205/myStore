@@ -39,7 +39,7 @@ function Contact() {
                         <div><PhoneRoundedIcon /> <span>+91 8470-950-994</span></div>
                         <div><EmailRoundedIcon /> <a className='text-dark' href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSHvnwfqvHxmJHTJzpMwlknLtLgWKlVHMzKXMvkpkrrsrfrjVFxbNtnKlrNBcNsBTNkWQwJJ" target='_blank'>myStore.org.0109@gmail.com</a></div>
                         <div><BusinessRoundedIcon /> <span>New Delhi, Delhi</span></div>
-                        <div><LanguageRoundedIcon /> <a className='text-dark' href="https://pulkit1205.netlify.app" target='_blank'>https://pulkit1205.netlify.app</a></div>
+                        <div><LanguageRoundedIcon /> <a className='text-dark' href="https://pulkit1205.netlify.app" target='_blank'>https://portfoliopulkit.vercel.app</a></div>
                     </div>
                 </div>
                 <div>
