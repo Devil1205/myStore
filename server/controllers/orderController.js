@@ -1,5 +1,6 @@
 const Order = require('../models/orderSchema');
 const Product = require('../models/productSchema');
+const { sendEmailToQueue } = require('../producers/emailNotification');
 
 //create new order
 const createOrder = async (req, res, next) => {
@@ -18,8 +19,14 @@ const createOrder = async (req, res, next) => {
             paidAt: Date.now()
         });
 
+        const emailData = {
+            id: order._id,
+            email: order.user.email,
+            subject: "Order placed successfully",
+            message: `Your order ${order._id} has been placed successfully. Thank you for shopping with us.`
+        };
+        sendEmailToQueue(`order-placed-${order._id}`, emailData);
         await order.save();
-
         return res.status(201).json({ sucess: true, order });
     }
     catch (e) {

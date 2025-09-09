@@ -2,15 +2,18 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 const env = require('dotenv');
-const connectDb = require('./db/db');
+const {connectDb,connectRedis} = require('./db/db');
 const errorHandler = require('./middlewares/errorHandler');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const cloudinary = require('cloudinary');
 const fileUpload = require('express-fileupload');
 const path = require('path');
+require('./workers/emailNotification');
 
-console.log("Environment: " + process.env.URI);
+//configure env path
+env.config({path: "/mystore/server/.env"});
+
 app.use(cors({
     origin: ["https://mystore-devil1205.vercel.app", "http://localhost:5173"],
     credentials: true
@@ -24,11 +27,9 @@ app.use(express.urlencoded({ extended: true, limit: "5mb" }))
 app.use(cookieParser());
 app.use(fileUpload());
 
-//configure env path
-env.config({path: "./server/.env"});
-
 //connectDb function call
 connectDb();
+connectRedis();
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
@@ -43,10 +44,10 @@ app.use("/api/v1/", require('./routes/order'));
 app.use("/api/v1/", require('./routes/payment'));
 
 app.use(errorHandler);
-app.use(express.static(path.join(__dirname, "../client/dist")));
-app.get("*", (req,res)=>{
-    res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
-})
+// app.use(express.static(path.join(__dirname, "../client/dist")));
+// app.get("*", (req,res)=>{
+//     res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
+// })
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
