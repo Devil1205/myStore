@@ -45,10 +45,10 @@ app.use("/api/v1/", require('./routes/order'));
 app.use("/api/v1/", require('./routes/payment'));
 
 app.use(errorHandler);
-// app.use(express.static(path.join(__dirname, "../client/dist")));
-// app.get("*", (req,res)=>{
-//     res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
-// })
+app.use(express.static(path.join(__dirname, "../client/dist")));
+app.get("*", (req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
+})
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
