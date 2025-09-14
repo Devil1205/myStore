@@ -9,10 +9,11 @@ const cors = require('cors');
 const cloudinary = require('cloudinary');
 const fileUpload = require('express-fileupload');
 const path = require('path');
-require('./workers/emailNotification');
 
 //configure env path
-env.config({path: "/mystore/server/.env"});
+env.config({path: path.join(__dirname,".env")});
+
+// require('./workers/emailNotification');
 
 app.use(cors({
     origin: ["https://mystore-devil1205.vercel.app", "http://localhost:5173"],
